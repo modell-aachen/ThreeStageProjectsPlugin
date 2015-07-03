@@ -1,0 +1,10 @@
+%META:TOPICINFO{author="BaseUserMapping_333" date="1358247993" format="1.1" version="3"}%
+%META:TOPICPARENT{name="WebHome"}%
+%IF{
+"istopic '%USERSWEB%.Default%TOPIC%'"
+then="$percentINCLUDE{$quot%USERSWEB%.Default%TOPIC%$quot}$percent"
+else="$percentINCLUDE{$quot%SYSTEMWEB%.Default%TOPIC%$quot}$percent"
+}%
+| <!--statDate--> | <!--statViews--> | <!--statSaves--> | <!--statUploads--> | <!--statTopViews--> | <!--statTopContributors--> |
+| Jan 2013 |  85 |  8 |  0 | &nbsp;29 [[Kundenprojekte]]<br />&nbsp;25 [[WebHome]]<br />&nbsp;11 [[Kundenprojekt004]]<br />&nbsp;&nbsp;5 [[WebTopicList]]<br />&nbsp;&nbsp;4 [[Kundenprojekt012]]<br />&nbsp;&nbsp;3 [[Kundenprojekt011]]<br />&nbsp;&nbsp;2 [[KundenprojekteViewTemplate]]<br />&nbsp;&nbsp;1 [[KundenprojekteForm]]<br />&nbsp;&nbsp;1 [[CustomSkinActionformTemplate]]<br />&nbsp;&nbsp;1 [[WebStatistics]]<br />&nbsp;&nbsp;1 [[CustomSkinCommentPluginTemplate]] | &nbsp;&nbsp;4 Main.AdminUser<br />&nbsp;&nbsp;3 Main.CarstenBehrens<br />&nbsp;&nbsp;1 Main.HansjoachimSchneider |
+| Nov 2012 |  151 |  14 |  0 | &nbsp;51 [[Kundenprojekte]]<br />&nbsp;48 [[WebHome]]<br />&nbsp;24 [[Kundenprojekt000]]<br />&nbsp;12 [[Kundenprojekt004]]<br />&nbsp;&nbsp;3 [[WebTopicList]]<br />&nbsp;&nbsp;3 [[Kundenprojekt006]]<br />&nbsp;&nbsp;2 [[KundenprojekteViewTemplate]]<br />&nbsp;&nbsp;2 [[KundenprojekteTemplate]]<br />&nbsp;&nbsp;2 [[Kundenprojekt003]]<br />&nbsp;&nbsp;2 [[CustomSkinCommentPluginTemplate]]<br />&nbsp;&nbsp;2 [[Kundenprojekt007]] | &nbsp;11 Main.AdminUser<br />&nbsp;&nbsp;2 Main.CarstenBehrens<br />&nbsp;&nbsp;1 Main.HaraldSchoenfeld |

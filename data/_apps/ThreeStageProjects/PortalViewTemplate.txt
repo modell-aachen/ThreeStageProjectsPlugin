@@ -1,0 +1,173 @@
+%META:TOPICINFO{author="cgrams" date="1432306551" format="1.1" version="16"}%
+%TMPL:INCLUDE{"SystemView"}%
+
+%{ <verbatim class="tml"> }%
+%TMPL:DEF{"modacButtonsLEFT"}%<li><div class='modacActionButtonACTIVE'><a href="%SCRIPTURL{view}%/%WEB%/%TOPIC%">%MAKETEXT{"Projects web"}%</a></div></li>%TMPL:END%
+%{ </verbatim> }%
+
+%{ <verbatim class="tml"> }%
+%TMPL:DEF{"script"}%%JQREQUIRE{"ui::dialog, ui::button, textboxlist, blockui"}%%ADDTOZONE{"script" id="tableScript" text="<script type='text/javascript' src='%PUBURLPATH%/%SYSTEMWEB%/ProjectsAppContrib/projectapp.js'></script>" requires="JQUERYPLUGIN::FOSWIKI::PREFERENCES"}%%TMPL:END%
+%{ </verbatim> }%
+
+%{ <verbatim class="tml"> }%
+%TMPL:DEF{"content"}%
+%TMPL:P{"ListProjects"}%
+%TMPL:P{"CreateProjects"}%
+%TMPL:END%
+%{ </verbatim> }%
+
+%{ <verbatim class="tml"> }%
+%TMPL:DEF{"MyTasks"}%
+<div class="widgetBlockTitle">%MAKETEXT{"My projects"}%</div>
+<div class="widgetBlockContent">
+<table class='atpSearch' id='myProjects'><thead><tr><th>%MAKETEXT{"Title"}%</th><th>%MAKETEXT{"Status"}%</th></tr></thead><tbody>
+<!-- SOLRSEARCH -->%SOLRSEARCH{"type:topic web:%WEB% field_ProjectManager_lst:(%WIKINAME% OR %WIKIUSERNAME% OR %USERNAME%) form:(%ProjectForm{default="TSProjectsProjectForm"}% OR %WEB%.%ProjectForm{default="TSProjectsProjectForm"}%) process_state_s:(NEW OR INPROGRESS)"
+format="<tr><td>[[$web.$topic][$title]]</td><td>$process_state_s</td></tr>"
+}%<!-- /SOLRSEARCH -->
+</tbody></table>%AMPEL{"myProjects" COND="CLOSED" WARN="%SIGNAL_PREWARNTIME{default="7"}%" DST="%MAKETEXT{"Signal"}%" DATE="%MAKETEXT{"Due"}%"}%
+</div>
+<div class="widgetBlockTitle">%MAKETEXT{"My milestones"}%</div>
+<div class="widgetBlockContent">
+<table class='atpSearch' id='myMilestones'><thead><tr><th>%MAKETEXT{"Title"}%</th><th>%MAKETEXT{"Status"}%</th><th>%MAKETEXT{"Due"}%</th><th>%MAKETEXT{"Signal"}%</th></tr></thead><tbody>
+<!-- SOLRSEARCH -->%SOLRSEARCH{"type:topic web:%WEB% field_Responsible_s:(%WIKINAME% OR %WIKIUSERNAME% OR %USERNAME%) form:(TSProjectsMilestoneForm OR %WEB%.TSProjectsMilestoneForm) process_state_s:(NEW OR INPROGRESS)"
+format="<tr><td>[[$web.$topic][$title]]</td><td>$percentSOLRSEARCH{\"web:%WEB% topic:$topic* process_state_s:INPROGRESS field_Due_dt:[1990-01-01T23:59:59.999Z TO NOW/DAY+%SIGNAL_PREWARNTIME{default="7"}%DAYS]\" format=\"<nop>\" footer=\"AMBER \"}$percent$percentSOLRSEARCH{\"web:%WEB% process_state_s:INPROGRESS topic:$topic* field_Due_dt:[1990-01-01T23:59:59.999Z TO NOW/DAY]\" format=\"<nop>\" footer=\"RED \"}$percent$process_state_s</td><td>$field_Due_dt</td><td></td></tr>"
+}%<!-- /SOLRSEARCH -->
+</tbody></table>%AMPEL{"myMilestones" COND="CLOSED" WARN="%SIGNAL_PREWARNTIME{default="7"}%" DST="%MAKETEXT{"Signal"}%" DATE="%MAKETEXT{"Due"}%" AMBEROVERRIDE="AMBER" REDOVERRIDE="RED"}%
+</div>
+<div class="widgetBlockTitle">%MAKETEXT{"My processes"}%</div>
+<div class="widgetBlockContent">
+<table class='atpSearch' id='myProcesses'><thead><tr><th>%MAKETEXT{"Title"}%</th><th>%MAKETEXT{"Status"}%</th><th>%MAKETEXT{"Due"}%</th><th>%MAKETEXT{"Signal"}%</th></tr></thead><tbody>
+<!-- SOLRSEARCH -->%SOLRSEARCH{"type:topic web:%WEB% field_Responsible_s:(%WIKINAME% OR %WIKIUSERNAME% OR %USERNAME%) form:(ProjectsProcessForm OR %WEB%.ProjectsProcessForm) process_state_s:(NEW OR INPROGRESS) field_Due_dt:[1990-01-01T23:59:59.999Z TO *]"
+format="<tr><td>[[$web.$topic][$title]]</td><td>$process_state_s</td><td>$field_Due_dt</td><td></td></tr>"
+}%<!-- /SOLRSEARCH -->
+</tbody></table>%AMPEL{"myProcesses" COND="FINISHED" WARN="%SIGNAL_PREWARNTIME{default="7"}%" DST="%MAKETEXT{"Signal"}%" DATE="%MAKETEXT{"Due"}%"}%
+</div>
+%TMPL:END%
+%{ </verbatim> }%
+
+%{ <verbatim class="tml"> }%
+%TMPL:DEF{"ListHead"}%
+<tr>
+  <th>
+    %MAKETEXT{"Title"}%
+  </th>
+<!-- MSs -->%FORMATLIST{"%ProjectMSs{default=""}%" format="$percentTMPL:P{\"MSHead\" name=\"$1\"}$percent" separator=""}% <!-- /MSs -->
+</tr>
+%TMPL:END%
+%{ </verbatim> }%
+
+%{ <verbatim class="tml"> }%
+%TMPL:DEF{"MSHead"}%<!-- MS %name% -->
+<th>%%name%Label%</th>
+<!-- /MS %name% -->%TMPL:END%
+%{ </verbatim> }%
+
+%{ <verbatim class="tml"> }%
+%TMPL:DEF{"MSBody"}%<!-- MS %name% -->
+<td style='text-align:center;'>$percentQUERY{\"'$percentSUBST{text=\"$web.$topic\" pattern=\"%ProjectBaseSuffix%\" format=\"%name%\"}$percent'/Due\"}$percent<span style='display:none'>$percentSOLRSEARCH{\"web:%WEB% topic:$percentSUBST{text=\"$topic\" pattern=\"%ProjectBaseSuffix%\" format=\"%name%\"}$percent* process_state_s:INPROGRESS field_Due_dt:[1990-01-01T23:59:59.999Z TO NOW/DAY+%SIGNAL_PREWARNTIME{default="7"}%DAYS]\" format=\"<nop>\" footer=\"AMBER \"}$percent$percentSOLRSEARCH{\"web:%WEB% process_state_s:INPROGRESS topic:$percentSUBST{text=\"$topic\" pattern=\"%ProjectBaseSuffix%\" format=\"%name%\"}$percent* field_Due_dt:[1990-01-01T23:59:59.999Z TO NOW/DAY]\" format=\"<nop>\" footer=\"RED \"}$percent$percentWORKFLOWMETA{topic=\"$percentSUBST{text=\"$web.$topic\" pattern=\"%ProjectBaseSuffix%\" format=\"%name%\"}$percent\" web=\"$web\"}$percent</span></td>
+<!-- /MS %name% -->%TMPL:END%
+%{ </verbatim> }%
+
+%{ <verbatim class="tml"> }%
+%TMPL:DEF{"ListRow"}%<tr><td> [[$web.$topic][$title]] </td><!-- MSs -->%FORMATLIST{"%ProjectMSs{default=""}%" format="$percentTMPL:P{\"MSBody\" name=\"$1\"}$percent" separator=""}% <!-- /MSs --></tr>%TMPL:END%
+%{ </verbatim> }%
+
+%{ <verbatim class="tml"> }%
+%TMPL:DEF{"ListFields"}%web, topic, webtopic, title, field_Responsible_lst, field_Due_dt%TMPL:END%
+%{ </verbatim> }%
+
+%{ <verbatim class="tml"> }%
+%TMPL:DEF{"ListProjects"}%
+<div class="widgetBlockTitle">%MAKETEXT{"Manage projects"}%</div>
+<div class="widgetBlockContent">
+%TABPANE{select="%URLPARAM{"tab"}%" class="simple"}%
+%TMPL:P{"searchProjects" label="open" id="open" status="INPROGRESS"}%
+%TMPL:P{"searchProjects" label="closed" id="closed" status="(* -INPROGRESS)"}%
+%ENDTABPANE%
+</div>
+%TMPL:END%
+%{ </verbatim> }%
+
+%{ <verbatim class="tml"> }%
+%TMPL:DEF{"searchProjects"}%%TAB{"%label%" id="%id%"}%
+%SOLRSEARCH{"web:%ProjectWeb{default="%BASEWEB%"}% type:topic topic:(%ProjectBasePrefix%* *%ProjectBaseSuffix%) process_state_s:%status%"
+ rows="999"
+ header="<table id='searchProjects%id%' class='metaDataHead'>
+<thead>%TMPL:P{"ListHead"}%</thead>
+</thead>
+<tbody>"
+ format="%TMPL:P{"ListRow"}%"
+ footer="</tbody></table>"
+ fields="%TMPL:P{"ListFields"}%"
+ sort="webtopic"
+}%%FORMATLIST{"%ProjectMSs{default=""}%" format="$percentAMPEL{\"searchProjects%id%\" DATE=\"$percent$1Label$percent\" DST=\"$percent$1Label$percent\" DONE=\"$percent$1Label$percent\" COND=\"CLOSED\" WARN=\"%SIGNAL_PREWARNTIME{default="7"}%\" AMBEROVERRIDE=\"AMBER\" REDOVERRIDE=\"RED\"}$percent" separator=""}%
+%ENDTAB%%TMPL:END%
+%{ </verbatim> }%
+
+%{ <verbatim class="tml"> }%
+%TMPL:DEF{"CreateBaseProject"}%<!-- BaseProject -->
+<table class="metaDataHead">
+<tr><td style="width: 200px;">%MAKETEXT{"Order number"}%:</td><td>%RENDERFOREDIT{field="OrderNumber" format="$edit" form="%ProjectForm{default="TSProjectsProjectForm"}%"}%</td></tr>
+<tr><td>%MAKETEXT{"Customer"}%:</td><td>%RENDERFOREDIT{field="Customer" format="$edit" form="%ProjectForm{default="TSProjectsProjectForm"}%"}%</td></tr>
+<tr><td>%MAKETEXT{"Project name"}%:</td><td>%RENDERFOREDIT{field="TopicTitle" format="$edit" form="%ProjectForm{default="TSProjectsProjectForm"}%"}%</td></tr>
+<tr><td>%MAKETEXT{"Project manager"}%:</td><td>%RENDERFOREDIT{field="ProjectManager" format="$edit" form="%ProjectForm{default="TSProjectsProjectForm"}%"}%</td></tr>
+</table>
+<!-- /BaseProject -->%TMPL:END%
+%{ </verbatim> }%
+%{ <verbatim class="tml"> }%
+%TMPL:DEF{"CreateProjects"}%
+%TMPL:INCLUDE{"%SYSTEMWEB%.JSCalendarContribInline"}%<!-- JSCalendarContribInline -->
+<div class="widgetBlockTitle">%MAKETEXT{"Create new project"}%</div>
+<div class="widgetBlockContent">
+%INCLUDE{"%SYSTEMWEB%/JSCalendarContribInline"}%
+<form action="%SCRIPTURLPATH{rest}%/ThreeStageProjectsPlugin/autoinc" method="post" name="%WEB%">
+<input type="hidden" name="suffixes" value="%ProjectMSs%,%FORMATLIST{"%ProjectMSs{default=""}%" format="$percent$1Processes$percent" separator=","}%" />
+<input type="hidden" name="templatetopic" value="%ProjectBaseTemplate%" />
+<input type="hidden" name="targetwebtopic" value="%ProjectWeb{default="%BASEWEB%"}%.%ProjectBasePrefix%%ProjectBaseAutoinc{default="AUTOINC000"}%%ProjectBaseSuffix%" />
+<input type="hidden" name="action_quietsave" value="1">
+%TMPL:P{"CreateBaseProject"}%
+
+<table class='metaDataHead'>
+<thead style='text-align: left;'>
+<tr>
+  <th style='text-align: left;'>
+    %MAKETEXT{"Milestone"}%
+  </th>
+  <th style='text-align: left;'>
+    %MAKETEXT{"Responsible"}%
+  </th>
+  <th style='text-align: left;'>
+    %MAKETEXT{"Due"}%
+  </th>
+</tr>
+</thead>
+<tbody>
+<!-- MSs -->%FORMATLIST{"%ProjectMSs{default=""}%" format="$percentTMPL:P{\"MS\" name=\"$1\"}$percent" separator=""}% <!-- /MSs -->
+<tr>
+  <td colspan="3">
+    %BUTTON{"%MAKETEXT{"Create new project"}%" type="submit"}%
+  </td>
+</tr>
+</tbody></table>
+<!-- Processes -->%FORMATLIST{"%ProjectMSs{default=""}%" format="<input type='hidden' name='slave_$1' value='$percent$1Processes$percent' />$percentFORMATLIST{\"$percent$1Processes$percent\" format=\"<input type='hidden' name='$dollar1Template' value='$dollarpercent$dollar1Template$dollarpercent' />\" separator=\"\"}$percent" separator=""}%<!-- /Processes -->
+</form>
+</div>
+%TMPL:END%
+%{ </verbatim> }%
+
+%{ <verbatim class="tml"> }%
+%TMPL:DEF{"MS"}%<!-- MS %name% -->
+<tr>
+  <td>
+     %%name%Label%
+  </td>
+  <td>
+    <input type="hidden" name="%name%Template" value="%%name%Template%" />
+    <input type="text" name="Update_%name%_Responsible" autocomplete="%USERAUTOCOMPLETE%">
+  </td>
+  <td>
+    <input type="text" class="foswikiInputField" id="%name%Due" name="Update_%name%_Due" /><img src="%PUBURLPATH%/%SYSTEMWEB%/JSCalendarContrib/img.gif" class="foswikiButton foswikiEditFormCalendarButton" onclick="return showCalendar('%name%Due', ' %e %b %Y ')" /><img style="cursor: pointer; padding-left: 3px;" src="/pub/System/DocumentGraphics/trash-small.png" alt="" onclick="$(this).closest('td').find('.foswikiEditFormDateField,.foswikiInputField').val('')">
+  </td>
+</tr>
+<!-- /MS %name% -->%TMPL:END%
+%{ </verbatim> }%

@@ -1,0 +1,6 @@
+.twistyTarget table thead {
+    display: none;
+}
+table.processTable {
+    width: 100%;
+}

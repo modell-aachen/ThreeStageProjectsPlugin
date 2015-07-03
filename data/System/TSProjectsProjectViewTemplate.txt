@@ -1,0 +1,53 @@
+%META:TOPICINFO{author="cgrams" date="1433230946" format="1.1" version="11"}%
+%{ <verbatim class="tml"> }%
+%TMPL:INCLUDE{view}%
+%TMPL:INCLUDE{"TSProjectsBase"}%
+%{ </verbatim> }%
+
+%{ <verbatim class="tml"> }%
+%TMPL:DEF{"content"}%%TMPL:P{"simpleheader"}%
+
+%TEXT%
+
+%INCLUDE{"%SYSTEMWEB%/JSCalendarContribInline"}%
+%JQREQUIRE{"jqtwisty"}%
+
+%TMPL:P{"ProjectOutlineData"}%
+
+%TMPL:P{"BasicDates"}%
+%TMPL:END%
+%{ </verbatim> }%
+
+%{ <verbatim class="tml"> }%
+%TMPL:DEF{"BasicDates"}%
+<div class="widgetBlockTitle">%MAKETEXT{"basic dates"}%</div>
+<div class="widgetBlockContent" id="qgates">
+<table class="metaDataHead">
+<tr><th>%MAKETEXT{"Cost unit"}%</th><th>%MAKETEXT{"Due date"}%</th><th>%MAKETEXT{"Responsible"}%</th><th style="width:100px;">%MAKETEXT{"Signal"}%</th></tr>
+<!-- MSs -->%FORMATLIST{"%ProjectMSs{default=""}%" format="$percentTMPL:P{\"qgateRowCheck\" gate=\"$1\"}$percent" separator=""}% <!-- /MSs -->
+</table>
+</div>
+%AMPEL{"qgates" DATE="%MAKETEXT{"Due date"}%" DST="%MAKETEXT{"Signal"}%" DONE="%MAKETEXT{"Signal"}%" COND="CLOSED" WARN="%SIGNAL_PREWARNTIME{default="7"}%" REDOVERRIDE="RED" AMBEROVERRIDE="AMBER"}%
+%AMPEL{QUERY=".processTable" DATE="Date" DST="Signal" DONE="Signal" COND="FINISHED" WARN="%SIGNAL_PREWARNTIME{default="7"}%"}%
+%TMPL:END%
+%{ </verbatim> }%
+
+%{ <verbatim class="tml"> }%
+%TMPL:DEF{"qgateRowCheck"}%%IF{"'%TMPL:P{basetopic}%%gate%'/Due" then="$percentTMPL:P{\"qgateRow\" gate=\"%gate%\"}$percent"}%%TMPL:END%
+%{ </verbatim> }%
+
+%{ <verbatim class="tml"> }%
+%TMPL:DEF{"qgateRow"}%<tr><td><a class='jqTwisty milestonetwisty' data-open-img='%PUBURLPATH%/%SYSTEMWEB%/JQTwistyContrib/toggle-collapse.png' data-close-img='%PUBURLPATH%/%SYSTEMWEB%/JQTwistyContrib/toggle.png' data-target='.%gate%Processes'></a>[[%TMPL:P{basetopic}%%gate%][%%gate%Label% %RENDERFORDISPLAY{field="TopicTitle" format="$value" topic="%TMPL:P{basetopic}%%gate%"}%]]</td><td width="200px">%RENDERFORDISPLAY{field="Due" format="$value" topic="%TMPL:P{basetopic}%%gate%"}%<span style='display:none'>%SOLRSEARCH{"web:%WEB% topic:%TMPL:P{basetopic}%%gate%* process_state_s:INPROGRESS field_Due_dt:[1990-01-01T23:59:59.999Z TO NOW/DAY+%SIGNAL_PREWARNTIME{default="7"}%DAYS]" format="<nop>" footer=" AMBER"}%%SOLRSEARCH{"web:%WEB% process_state_s:INPROGRESS topic:%TMPL:P{basetopic}%%gate%* field_Due_dt:[1990-01-01T23:59:59.999Z TO NOW/DAY]" format="<nop>" footer=" RED"}%</span></td><td width="200px">%RENDERFORDISPLAY{field="Responsible" format="$value" topic="%TMPL:P{basetopic}%%gate%"}%</td><td style="width:100px;text-align:center;"><span style='display:none'>%WORKFLOWMETA{topic="%TMPL:P{basetopic}%%gate%"}%</span></td></tr><tr class='twistyTarget %gate%Processes' style='display:none'><td colspan="4"><table><thead><th></th><th>Date</th><th></th><th>Signal</th></thead><tbody class='processes' data-gate='%TMPL:P{basetopic}%%gate%'><tr><td colspan="4"><img src="%PUBURLPATH%/%SYSTEMWEB%/JQueryPlugin/images/spinner.gif" /></td></tr></tbody></table></td></tr>%TMPL:END%
+%{ </verbatim> }%
+
+%{ <verbatim class="tml"> }%
+%TMPL:DEF{"doneButton"}%<input type="checkbox" disabled="disabled" %IF{"'%WORKFLOWMETA{topic="%TMPL:P{basetopic}%%gate%"}%'='FINISHED'" then="checked=$quotchecked$quot><span style='display:none'>closed</span>" else=">"}% %MAKETEXT{"done"}%%TMPL:END%
+%{ </verbatim> }%
+
+%{ <verbatim class="tml"> }%
+%TMPL:DEF{"basetopic"}%%SUBST{text="%BASETOPIC%" pattern="%ProjectBaseSuffix%$" format=""}%%TMPL:END%
+%{ </verbatim> }%
+
+%{ <verbatim class="tml"> }%
+%TMPL:DEF{"projecttopic"}%%BASETOPIC%%TMPL:END%
+%{ </verbatim> }%

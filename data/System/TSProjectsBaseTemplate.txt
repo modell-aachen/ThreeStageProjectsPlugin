@@ -1,0 +1,33 @@
+%META:TOPICINFO{author="cgrams" date="1433231914" format="1.1" version="8"}%
+%{ <verbatim class="tml"> }%
+%TMPL:DEF{"modacButtonsLEFT"}%<li><div class='modacActionButtonACTIVE'><a href="%SCRIPTURL{view}%/%WEB%/%TOPIC%">%MAKETEXT{"Projects web"}%</a></div></li>%TMPL:END%
+%{ </verbatim> }%
+
+%{ <verbatim class="tml"> }%
+%TMPL:DEF{"script"}%%JQREQUIRE{"ui::dialog, ui::button, textboxlist, blockui"}%%ADDTOZONE{"script" id="tableScript" text="<script type='text/javascript' src='%PUBURLPATH%/%SYSTEMWEB%/ThreeStageProjectsPlugin/projectapp.js'></script>" requires="JQUERYPLUGIN::FOSWIKI::PREFERENCES"}%%ADDTOZONE{"head" id="tableStyle" text="<style type='text/css'>@import url('%PUBURLPATH%/%SYSTEMWEB%/ThreeStageProjectsPlugin/projectapp.css');</style>"}%%TMPL:PREV%%TMPL:END%
+%{ </verbatim> }%
+
+%{ <verbatim class="tml"> }%
+%TMPL:DEF{"ProjectOutlineData"}%<div class="widgetBlockTitle">%MAKETEXT{"Project outline data"}%</div>
+<div class="atpSearch">
+<table class="metaDataHead">
+<tr>
+  <td>%MAKETEXT{"Order number"}%:</td><td width="300px">%RENDERFORDISPLAY{topic="%TMPL:P{"projecttopic"}%" field="OrderNumber" format="$value"}%</td>
+  <td>%MAKETEXT{"Customer"}%:</td><td>%RENDERFORDISPLAY{topic="%TMPL:P{"projecttopic"}%" field="Customer" format="$value"}%</td>
+  <td rowspan="2" style="text-align:right;"><img src="%WIKILOGOIMG%" /></td>
+</tr>
+<tr>
+  <td>%MAKETEXT{"Project name"}%:</td><td>%RENDERFORDISPLAY{topic="%TMPL:P{"projecttopic"}%" field="TopicTitle" format="$value"}%</td>
+  <td>%MAKETEXT{"Project manager"}%:</td><td>%RENDERFORDISPLAY{topic="%TMPL:P{"projecttopic"}%" field="ProjectManager" format="$value"}%</td>
+</tr>
+</table>
+</div>%TMPL:END%
+%{</verbatim>}%
+
+%{<verbatim class="tml">}%
+%TMPL:DEF{"projecttopic"}%%TMPL:P{"basetopic"}%%ProjectBaseSuffix%%TMPL:END%
+%{</verbatim>}%
+
+%{ <verbatim class="tml"> }%
+%TMPL:DEF{"basetopic"}%%SUBST{text="%BASETOPIC%" pattern="(^%ProjectBasePrefix%\d*).*" format="$1"}%%TMPL:END%
+%{ </verbatim> }%

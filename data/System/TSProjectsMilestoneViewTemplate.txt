@@ -1,0 +1,63 @@
+%META:TOPICINFO{author="cgrams" date="1433231890" format="1.1" version="10"}%
+%{ <verbatim class="tml"> }%
+%TMPL:INCLUDE{view}%
+%TMPL:INCLUDE{"TSProjectsBase"}%
+%{ </verbatim> }%
+
+%{ <verbatim class="tml"> }%
+%TMPL:DEF{"top_simple"}%<div class="patternTop"><div id="modacHeading">%%SUBST{text="%TOPIC%" pattern="(%ProjectBasePrefix%\d+)" format=""}%Label%</div>
+<span class="patternHomePath">%TMPL:P{"breadcrumb"}%</span><br></div><!--/patternTop-->%TMPL:END%
+%{ </verbatim> }%
+
+%{ <verbatim class="tml"> }%
+%TMPL:DEF{"content"}%%INCLUDE{"%SYSTEMWEB%/JSCalendarContribInline"}%
+%TMPL:P{"ProjectOutlineData"}%
+
+%TEXT%
+
+%TMPL:P{"MilestoneOutlineData"}%
+%TMPL:P{"Processes"}%
+%TMPL:END%
+%{ </verbatim> }%
+
+%{<verbatim class="tml">}%
+%TMPL:DEF{"MilestoneOutlineData"}%
+<div class="widgetBlockTitle">%MAKETEXT{"Cost unit outline data"}%</div>
+<div class="widgetBlockContent">
+<table class="atpSearch">
+<tr><td>%MAKETEXT{"Responsible"}%:</td><td>%RENDERFORDISPLAY{field="Responsible" format="$value"}%</td></tr>
+<tr><td>%MAKETEXT{"Due"}%:</td><td>%RENDERFORDISPLAY{field="Due" format="$value"}%</td></tr>
+</table>
+</div>
+%TMPL:END%
+%{</verbatim>}%
+
+%{<verbatim class="tml">}%
+%TMPL:DEF{"Processes"}%
+<div class="widgetBlockTitle">%MAKETEXT{"Processes"}%</div>
+<div class="widgetBlockContent" id="processes">
+<table class="metaDataHead">
+<tr><th>%MAKETEXT{"Process"}%</th><th>%MAKETEXT{"Due date"}%</th><th>%MAKETEXT{"Responsible"}%</th><th style="width:100px;">%MAKETEXT{"Signal"}%</th></tr>
+<!-- Processes -->%TMPL:P{"processesRows"}%<!-- /Processes -->
+</table>
+</div>
+%AMPEL{"processes" DATE="%MAKETEXT{"Due date"}%" DST="%MAKETEXT{"Signal"}%" DONE="%MAKETEXT{"Signal"}%" COND="FINISHED" WARN="%SIGNAL_PREWARNTIME{default="7"}%"}%
+%TMPL:END%
+%{</verbatim>}%
+
+%{ <verbatim class="tml"> }%
+%TMPL:DEF{"processesRows"}%%FORMATLIST{"%%TMPL:P{"basetopicsuffix"}%Processes%" format="$percentTMPL:P{\"processRowCheck\" process=\"$1\"}$percent" separator=""}%%TMPL:END%
+%{ </verbatim> }%
+
+%{ <verbatim class="tml"> }%
+%TMPL:DEF{"processRowCheck"}%%IF{"'%TMPL:P{basetopic}%%process%'/Due" then="$percentTMPL:P{\"processRow\" process=\"%process%\"}$percent"}%%TMPL:END%
+%{ </verbatim> }%
+
+%{ <verbatim class="tml"> }%
+%TMPL:DEF{"processRow"}%<tr><td>[[%TMPL:P{basetopic}%%process%]]</td><td width="200px">%RENDERFORDISPLAY{field="Due" format="$value" topic="%TMPL:P{basetopic}%%process%"}%</td><td width="200px">%RENDERFORDISPLAY{field="Responsible" format="$value" topic="%TMPL:P{basetopic}%%process%"}%</td><td style="width:100px;text-align:center;"><span style='display:none'>%WORKFLOWMETA{topic="%TMPL:P{basetopic}%%process%"}%</span></td></tr>%TMPL:END%
+%{ </verbatim> }%
+
+%{ <verbatim class="tml"> }%
+%TMPL:DEF{"basetopicsuffix"}%%SUBST{text="%BASETOPIC%" pattern="^%ProjectBasePrefix%\d*" format=""}%%TMPL:END%
+%{ </verbatim> }%
+

@@ -1,0 +1,3 @@
+%META:TOPICINFO{author="BaseUserMapping_333" date="1398173296" format="1.1" version="1"}%
+%META:TOPICPARENT{name="WebHome"}%
+   * <a href="%SCRIPTURLPATH{"edit"}%/%BASEWEB%/ProjectAUTOINC000?template=%WEB%.ProjectEdit;templatetopic=%WEB%.ProjectTemplate;formtemplate=%ProjectForm{default="TSProjectsProjectForm"}%;t=%GMTIME{$epoch}%">%MAKETEXT{"Create new project"}%</a>

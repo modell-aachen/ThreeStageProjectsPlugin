@@ -1,0 +1,9 @@
+%META:TOPICINFO{author="BaseUserMapping_333" date="1432281232" format="1.1" version="1"}%
+| *Name* | *Type* | *Size* | *Values* | *Tooltip message* | *Attributes* |
+| TopicTitle | text | 30 | | %MAKETEXT{"Project name"}% | |
+| OrderNumber | text | 30 | | %MAKETEXT{"Order number"}% | |
+| Customer | text | 30 | | %MAKETEXT{"Customer"}% |  |
+| ProjectManager | textboxlist | 30 mustMatch limit="1" | %USERAUTOCOMPLETE% | %MAKETEXT{"Project manager"}% | M |
+
+   * Set ALLOWTOPICCHANGE = AdminUser
+   * Set NOWYSIWYG = 1

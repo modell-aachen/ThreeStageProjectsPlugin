@@ -1,0 +1,12 @@
+%META:TOPICINFO{author="BaseUserMapping_333" date="1432286663" format="1.1" version="4"}%
+
+
+%META:FORM{name="TSProjectsMilestoneForm"}%
+%META:FIELD{name="TopicTitle" attributes="" title="TopicTitle" value=""}%
+%META:FIELD{name="Responsible" attributes="" title="Responsible" value=""}%
+%META:FIELD{name="Due" attributes="" title="Due" value=""}%
+%META:PREFERENCE{name="DISPLAYCOMMENTS" title="DISPLAYCOMMENTS" type="Set" value="off"}%
+%META:PREFERENCE{name="WORKFLOW" title="WORKFLOW" type="Set" value=""}%
+%META:PREFERENCE{name="SetPref" title="SetPref" type="Set" value="%22WORKFLOW = MilestoneApprovalWorkflow%22"}%
+%META:PREFERENCE{name="EarlySetPrev" title="EarlySetPrev" type="Set" value="%22WORKFLOW = MilestoneApprovalWorkflow%22"}%
+%META:PREFERENCE{name="RemoveField" title="RemoveField" type="Set" value="Responsible, DueDate"}%

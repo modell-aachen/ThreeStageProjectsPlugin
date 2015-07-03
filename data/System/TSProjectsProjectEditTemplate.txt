@@ -1,0 +1,66 @@
+%META:TOPICINFO{author="cgrams" date="1433231283" format="1.1" version="6"}%
+%{ <verbatim class="tml"> }%
+%TMPL:INCLUDE{edit}%
+%TMPL:INCLUDE{"TSProjectsBase"}%
+%{ </verbatim> }%
+
+%{ <verbatim class="tml"> }%
+%TMPL:DEF{"formstart"}%<div class="foswikiFormHolder" id="formHolder">
+<form name="main" action="%SCRIPTURLPATH{"rest"}%/ThreeStageProjectsPlugin/updateBase" method="post">%TMPL:END%
+%{ </verbatim> }%
+
+%{ <verbatim class="tml"> }%
+%TMPL:DEF{"content"}%%TMPL:P{"simpleheader"}%
+%TMPL:P{"formstart"}%%TMPL:P{"formtop"}%
+<input type="hidden" name="baseweb" value="%BASEWEB%" />
+<input type="hidden" name="basetopic" value="%BASETOPIC%" />
+<input type="hidden" name="basesuffix" value="%ProjectBaseSuffix%" />
+%INCLUDE{"%SYSTEMWEB%/JSCalendarContribInline"}%
+%TMPL:P{"ProjectOutlineData"}%
+%TMPL:P{"BasicDates"}%
+%TMPL:P{"topicinfo"}%
+%TMPL:P{"formend"}%
+%TMPL:END%
+%{ </verbatim> }%
+
+%{<verbatim class="tml">}%
+%TMPL:DEF{"BasicDates"}%
+<div class="widgetBlockTitle">%MAKETEXT{"basic dates"}%</div>
+<div class="widgetBlockContent">
+<table class="metaDataHead caldisable">
+<!-- MSs -->%FORMATLIST{"%ProjectMSs{default=""}%" format="$percentTMPL:P{\"qgateRow\" gate=\"$1\"}$percent" separator=""}% <!-- /MSs -->
+</table>
+</div>
+%TMPL:END%
+%{</verbatim>}%
+
+%{<verbatim class="tml">}%
+%TMPL:DEF{"ProjectOutlineData"}%
+<div class="widgetBlockTitle">%MAKETEXT{"Project outline data"}%</div>
+<div class="widgetBlockContent">
+<table class="atpSearch caldisable">
+<tr>
+  <td>%MAKETEXT{"Order number"}%:</td><td width="300px">%RENDERFOREDIT{field="OrderNumber" format="$edit"}%</td>
+  <td>%MAKETEXT{"Customer"}%:</td><td>%RENDERFOREDIT{field="Customer" format="$edit"}%</td>
+  <td rowspan="2" style="text-align:right;"><img src="%WIKILOGOIMG%" /></td>
+</tr>
+<tr>
+  <td>%MAKETEXT{"Project name"}%:</td><td>%RENDERFOREDIT{field="TopicTitle" format="$edit"}%</td>
+  <td>%MAKETEXT{"Project manager"}%:</td><td>%RENDERFOREDIT{field="ProjectManager" format="$edit"}%</td>
+</tr>
+</table>
+</div>
+%TMPL:END%
+%{</verbatim>}%
+
+%{ <verbatim class="tml"> }%
+%TMPL:DEF{"qgateRow"}%<tr><td>%gate%: %%gate%Label%</td><td>%RENDERFOREDIT{field="Due" prefix="Update_%gate%_" format="$edit" topic="%TMPL:P{basetopic}%%gate%"}%<img style="cursor: pointer; padding-left: 3px;" src="/pub/System/DocumentGraphics/trash-small.png" alt="" onclick="$(this).closest('td').find('.foswikiEditFormDateField').val('')"></td><td>%RENDERFOREDIT{field="Responsible" prefix="Update_%gate%_" format="$edit" topic="%TMPL:P{basetopic}%%gate%"}%</td></tr>%TMPL:END%
+%{ </verbatim> }%
+
+%{ <verbatim class="tml"> }%
+%TMPL:DEF{"basetopic"}%%SUBST{text="%BASETOPIC%" pattern="%ProjectBaseSuffix%" format=""}%%TMPL:END%
+%{ </verbatim> }%
+
+%{ <verbatim class="tml"> }%
+%TMPL:DEF{"projecttopic"}%%BASETOPIC%%TMPL:END%
+%{ </verbatim> }%

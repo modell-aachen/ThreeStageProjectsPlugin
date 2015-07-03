@@ -1,0 +1,17 @@
+%META:TOPICINFO{author="BaseUserMapping_333" comment="reprev" date="1407162370" format="1.1" reprev="2" version="2"}%
+%META:TOPICPARENT{name="WebTopicList"}%
+| *Name* | *Type* | *Size* | *Values* | *Tooltip message* | *Attributes* |
+| DocumentType | select+values | 1 | %MAKETEXT{"Info page"}%=Info page,%MAKETEXT{"Process description"}%=Process description,%MAKETEXT{"Work instruction"}%=Work instruction,%MAKETEXT{"Checklist"}%=Checklist | %MAKETEXT{"Please choose a document type"}% | |
+| TopicTitle | text | 50 | | %MAKETEXT{"Please specify a distinct topic title"}% | |
+| Responsible | textboxlist | 50 mustMatch limit="1" | %USERAUTOCOMPLETE% | %MAKETEXT{"Responsible"}% | M |
+| AreaOfApplication | select+values | 1 | %MAKETEXT{"corporation-wide"}%=corporation-wide | %MAKETEXT{"Area of application"}% | |
+| ISO9001 | textboxlist | | | %MAKETEXT{"Norm classification"}% | |
+| ISO14001 | textboxlist | | | %MAKETEXT{"Norm classification"}% | |
+| ISOTS16949 | textboxlist | | | %MAKETEXT{"Norm classification"}% | |
+| OHSAS18001 | textboxlist | | | %MAKETEXT{"Norm classification"}% | |
+| ISO50001 | textboxlist | | | %MAKETEXT{"Norm classification"}% | |
+| Due | date | | | %MAKETEXT{"Due date"}% | |
+
+%META:PREFERENCE{name="WORKFLOW" title="WORKFLOW" type="Local" value=""}%
+%META:PREFERENCE{name="ALLOWTOPICCHANGE" title="ALLOWTOPICCHANGE" type="Set" value="AdminGroup"}%
+%META:PREFERENCE{name="NOWYSIWYG" title="NOWYSIWYG" type="Local" value="1"}%

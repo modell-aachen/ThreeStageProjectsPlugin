@@ -1,0 +1,31 @@
+%META:TOPICINFO{author="cgrams" date="1433230472" format="1.1" version="3"}%
+%{<verbatim class="tml">}%
+%TMPL:INCLUDE{"view"}%
+%TMPL:INCLUDE{"TSProjectsBase"}%
+%{</verbatim>}%
+
+%{<verbatim class="tml">}%
+%TMPL:DEF{"content"}%
+%TMPL:P{"ProjectOutlineData"}%
+
+%TEXT%
+
+%TMPL:P{"ProcessDialog"}%
+%TMPL:END%
+%{</verbatim>}%
+
+%{<verbatim class="tml">}%
+%TMPL:DEF{"ProcessDialog"}%%IF{"$WORKFLOWALLOWS" then="$percentTMPL:P{addActionDialog}$percent"}%%TMPL:END%
+%{</verbatim>}%
+
+%{<verbatim class="tml">}%
+%TMPL:DEF{"finishProcessDialog"}%<form method="post" action="%SCRIPTURL{rest}%/KVPPlugin/changeState">
+<input type="hidden" name="web" value="" />
+<input type="hidden" name="topic" value="%WEB%.%TOPIC%" />
+<input type="hidden" name="WORKFLOWACTION" value="Finish MS" />
+<input type="hidden" name="WORKFLOWSTATE" value="%WORKFLOWMETA%" />
+| <label for="message">%MAKETEXT{"Remark:"}%</label> | <input type="text" name="message" value="" /> |
+| <input type="submit" /> ||
+</form>
+%TMPL:END%
+%{</verbatim>}%

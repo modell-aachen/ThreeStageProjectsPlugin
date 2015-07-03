@@ -1,0 +1,34 @@
+%META:TOPICINFO{author="cgrams" date="1432304504" format="1.1" version="3"}%
+---++ Defaults
+%TWISTY%
+%EDITTABLE{}%
+| *State Type* | *visualize* | *Left Tab* | *Right Tab* | *Approved* |
+| approved | discussion | Approved Page | Discussion | 1 |
+| discussion | approved | Approved Page | Discussion | 0 |
+| draft | approved | Approved Page | Draft | 0 |
+| discarded | all | Approved Page | Discarded | 0 |
+%ENDTWISTY%
+
+---++ States
+%EDITTABLE{}%
+| *State* | *Allow Edit* | *Allow Move* | *Allow Tick* | *Message* | *State Type* |
+| NEW | LOGGEDIN | LOGGEDIN | nobody | This document is not yet in CIP. | draft |
+| INPROGRESS | %QUERY{"ProjectManager"}%, ProjectKeyUserGroup  | nobody | %QUERY{"Responsible"}%, AdminUser | This project is being worked on | draft |
+| CLOSED | %QUERY{"ProjectManager"}%, ProjectKeyUserGroup  | nobody | nobody | This project has been achieved | draft |
+| DISCARDED | %QUERY{"ProjectManager"}%, ProjectKeyUserGroup  | nobody | nobody | This project has been discarded | draft |
+ 
+---++ Transitions
+%EDITTABLE{}%
+| *State* | *Action* | *Next State* | *Allowed* | *Notify* | *Condition* | *Attribute* | *Warning* |
+| NEW | Create | INPROGRESS | LOGGEDIN, Main.KeyUserGroup | | | NEW | |
+| NEW | Put under CIP | INPROGRESS | LOGGEDIN, Main.KeyUserGroup | | | | |
+| INPROGRESS | Close project | CLOSED |%QUERY{"ProjectManager"}%, ProjectKeyUserGroup | | %IF{"0%FORMATLIST{"%ProjectMSs{default=""}%" format="$percentIF{\"'%WEB%.%SUBST{text="%TOPIC%" pattern="%ProjectBaseSuffix%$" format=""}%$1'/Due and '$percentWORKFLOWMETA{web=\"%WEB%\" topic=\"%SUBST{text="%TOPIC%" pattern="%ProjectBaseSuffix%$" format=""}%$1\"}$percent'=~'^[IN]'\" then=\"1\"}$percent" separator=""}%" then="off" else="on"}% | REMARK | |
+| INPROGRESS | Discard project | DISCARDED |%QUERY{"ProjectManager"}%, ProjectKeyUserGroup  | | | REMARK | |
+| CLOSED | Re-open | INPROGRESS | %QUERY{"ProjectManager"}%, ProjectKeyUserGroup  | | | REMARK | |
+| DISCARDED | Re-open | INPROGRESS |%QUERY{"ProjectManager"}%, ProjectKeyUserGroup | | | REMARK | |
+
+
+   * Set NOWYSIWYG=1
+   * Set WORKFLOW=
+   * Set ALLOWTOPICCHANGE=Main.AdminUser
+   * Set VIEW_TEMPLATE = WorkflowView

@@ -1,0 +1,109 @@
+%META:TOPICINFO{author="BaseUserMapping_333" date="1432648604" format="1.1" version="14"}%
+---+!! <nop>%WEB% Web Preferences
+
+%TOC%
+
+<sticky>
+<div class="%IF{"not context PreferencesPluginEnabled" then="foswikiHidden"}%">
+%EDITPREFERENCES{"%SYSTEMWEB%.DefaultPreferencesForm"}%
+</div>
+</sticky>
+
+---++ Modell Aachen Settings
+
+   * Set CONTENTTEMPLATEWEB = Processes
+   
+   * Set WORKFLOW = 
+   
+   
+
+---++ Appearance
+
+   * Set WEBBGCOLOR = #efefef
+      * <sticky>web-specific background color, <span style='background-color: %WEBBGCOLOR%'> current color </span></sticky>
+
+   * Set SITEMAPLIST = on
+      * set to =off= to hide this web from the [[%SYSTEMWEB%.SiteMap][SiteMap]]
+
+   * Set WEBSUMMARY = 
+      * description what this web is used for
+
+   * Set NOSEARCHALL = 
+      * if set to =on=, this web will be exclude web from a global search
+
+---++ Wiki application settings
+
+   * WebTopicEditTemplate
+      * default template for new topics in this web, if this topic does not exist,  [[%SYSTEMWEB%.WebTopicEditTemplate][site-level default template]] will be used
+
+   * Set WEBFORMS =
+      * Comma separated list of forms that can be attached to topics in this web. See [[%SYSTEMWEB%.DataForms][DataForms]] for more information.
+
+   * Set WIKIWORD_ALLOWED = [a-zA-Z0-9_-]*
+
+   * If you want to change the warn time, set this option:   * Set SIGNAL_PREWARNTIME = <no. of days>
+
+   * Set NO_MODAC_HEAD = 1
+
+---++ ThreeStageProjcets settings
+
+Set the template for the project's base here:
+   * Set ProjectBaseTemplate = _apps/ThreeStageProjects.ProjectTemplateBase
+
+Set the prefix and suffix for each new project here.
+For example =ProjectBasePrefix = Project= and =ProjectSuffix = Base= corresponds to =ProjectAUTOINC000Base=.
+   * Set ProjectBasePrefix = Project
+   * Set ProjectBaseSuffix = Base
+
+Set your quality gates here. You can set as many gates as you want. The value you set here will be used as prefix for each setting.
+   * Set ProjectMSs = MS1, MS2, MS3
+
+Here you can set the settings for each quality gate.
+
+This is the label that will be used in the tables, header etc. for MS1
+   * Set MS1Label = %MAKETEXT{"Milestone 1"}%
+This is the template used to create MS1
+   * Set MS1Template = ThreeStageProjects.MSTemplate
+Set the processes associated with MS1 here. The values set here will be used as a prefix for settings and the topics. You can set as many as you need (two in this example), but make them unique.
+   * Set MS1Processes = MS1P1, MS1P2
+Set the templates for the milestones. Don't forget to add a =Set SetPref="WORKFLOW=ProcessApprovalWorkflow"= to each templates settings.%BR%
+This is the template used for the first process of MS1
+   * Set MS1P1Template = Processes.MS1Process1
+This is the template used for the first process of MS1
+   * Set MS1P2Template = Processes.MS2Process2
+
+   * Set MS2Label = %MAKETEXT{"Milestone 2"}%
+   * Set MS2Template = _apps/ThreeStageProjects.MSTemplate
+   * Set MS2P1Template = Processes.MS2Process1
+   * Set MS2P2Template = Processes.MS2Process2
+   * Set MS2P3Template = Processes.MS2Process3
+   * Set MS2Processes = MS2P1, MS2P2, MS2P3
+
+   * Set MS3Label = %MAKETEXT{"Milestone 3"}%
+   * Set MS3Template = _apps/ThreeStageProjects.MSTemplate
+   * Set MS3P1Template = Processes.MS3Process1
+   * Set MS3Processes = MS3P1
+
+---++ Access control
+
+Users or groups who are allowed to view, change and rename topics in the <nop>%WEB% web.
+Remember that an empty setting is a valid setting; setting DENYWEBVIEW to nothing means that anyone can view the web.
+
+   * Set DENYWEBVIEW = WikiGuest
+   * Set ALLOWWEBVIEW =
+   * Set DENYWEBCHANGE = WikiGuest
+   * Set ALLOWWEBCHANGE = 
+   * Set DENYWEBRENAME = 
+   * Set ALLOWWEBRENAME = %USERSWEB%.AdminUser
+
+Users or groups allowed to change or rename this <nop>%TOPIC% topic: (e.g., [[%USERSWEB%.AdminGroup][AdminGroup]])
+
+   * Set ALLOWTOPICCHANGE = %USERSWEB%.AdminUser
+   * Set ALLOWTOPICRENAME = %USERSWEB%.AdminUser
+
+---
+%INCLUDE{"%SYSTEMWEB%.WebPreferencesHelp"}%
+
+
+%META:FILEATTACHMENT{name="logo.png" attachment="logo.png" attr="" comment="" date="1432283313" path="C:\Users\cgrams\Pictures\logo.png" size="6362" user="BaseUserMapping_333" version="1"}%
+%META:PREFERENCE{name="NOWYSIWYG" title="NOWYSIWYG" type="Local" value="1"}%

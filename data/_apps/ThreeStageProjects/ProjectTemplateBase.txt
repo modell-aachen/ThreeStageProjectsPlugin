@@ -1,0 +1,11 @@
+%META:TOPICINFO{author="BaseUserMapping_333" date="1432295513" format="1.1" version="9"}%
+
+
+%META:FORM{name="_apps/ThreeStageProjects.TSProjectsProjectForm"}%
+%META:FIELD{name="TopicTitle" attributes="" title="TopicTitle" value=""}%
+%META:FIELD{name="OrderNumber" attributes="" title="OrderNumber" value=""}%
+%META:FIELD{name="Customer" attributes="" title="Customer" value=""}%
+%META:FIELD{name="ProjectManager" attributes="M" title="ProjectManager" value="Administrator"}%
+%META:PREFERENCE{name="SetPref" title="SetPref" type="Set" value="%22WORKFLOW = ProjectApprovalWorkflow%22"}%
+%META:PREFERENCE{name="EarlySetPrev" title="EarlySetPrev" type="Set" value="%22WORKFLOW = ProjectApprovalWorkflow%22"}%
+%META:PREFERENCE{name="RemoveField" title="RemoveField" type="Set" value="Responsible, DueDate"}%

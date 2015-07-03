@@ -1,0 +1,31 @@
+%META:TOPICINFO{author="cgrams" date="1432307131" format="1.1" version="9"}%
+---++ Defaults
+%TWISTY%
+%EDITTABLE{}%
+| *State Type* | *visualize* | *Left Tab* | *Right Tab* | *Approved* |
+| approved | discussion | Approved Page | Discussion | 1 |
+| discussion | approved | Approved Page | Discussion | 0 |
+| draft | approved | Approved Page | Draft | 0 |
+| discarded | all | Approved Page | Discarded | 0 |
+%ENDTWISTY%
+
+---++ States
+%EDITTABLE{}%
+| *State* | *Allow Edit* | *Allow Move* | *Allow Tick* | *Message* | *State Type* |
+| NEW | LOGGEDIN | LOGGEDIN | nobody | This document is not yet in CIP. | draft |
+| INPROGRESS | %QUERY{"Responsible"}%, %QUERY{"'%SUBST{text="%TOPIC%" pattern="(%ProjectBasePrefix%\d+).*" format="$1%ProjectBaseSuffix%"}%'/ProjectManager"}%, ProjectKeyUserGroup | nobody | %QUERY{"Responsible"}%, %QUERY{"ProjectManager"}%, ProjectKeyUserGroup  | This process is being worked on | draft |
+| FINISHED | %QUERY{"Responsible"}%, %QUERY{"'%SUBST{text="%TOPIC%" pattern="(%ProjectBasePrefix%\d+).*" format="$1%ProjectBaseSuffix%"}%'/ProjectManager"}%, ProjectKeyUserGroup | nobody | nobody | This process has been finished | draft |
+ 
+---++ Transitions
+%EDITTABLE{}%
+| *State* | *Action* | *Next State* | *Allowed* | *Notify* | *Condition* | *Attribute* | *Warning* |
+| NEW | Create | INPROGRESS | LOGGEDIN, Main.KeyUserGroup | |  | NEW | |
+| NEW | Put under CIP | INPROGRESS | LOGGEDIN, Main.KeyUserGroup | | | | |
+| INPROGRESS | Finish process | FINISHED | %QUERY{"Responsible"}%, %QUERY{"'%SUBST{text="%TOPIC%" pattern="(%ProjectBasePrefix%\d+).*" format="$1%ProjectBaseSuffix%"}%'/ProjectManager"}%, ProjectKeyUserGroup | %QUERY{"ProjectManager"}% | %IF{"$HASOPENTICKS" then="off"}% | REMARK | |
+| FINISHED | Re-Open | INPROGRESS |%QUERY{"Responsible"}%,  %QUERY{"'%SUBST{text="%TOPIC%" pattern="(%ProjectBasePrefix%\d+).*" format="$1%ProjectBaseSuffix%"}%'/ProjectManager"}%, ProjectKeyUserGroup | | | REMARK | |
+
+
+   * Set NOWYSIWYG=1
+   * Set WORKFLOW=
+   * Set ALLOWTOPICCHANGE=Main.AdminUser
+   * Set VIEW_TEMPLATE = WorkflowView

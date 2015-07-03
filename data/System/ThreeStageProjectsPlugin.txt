@@ -1,0 +1,35 @@
+%META:TOPICPARENT{name="Plugins"}%
+---+ Three Stage Projects Plugin
+
+%SHORTDESCRIPTION%
+
+---++ Installation
+
+Wiki pages:
+   * Copy =_apps/ThreeStageProjcets= to your desired destination.
+   * Customize the =WebPreferences=
+   * Correct the form in =ProjectTemplateBase=
+Configure:
+   * Enable the plugin
+
+
+<!--
+One line description, required for extensions repository catalog.
+   * Set SHORTDESCRIPTION = %$SHORTDESCRIPTION%
+-->
+
+---++ Installation
+%$INSTALL_INSTRUCTIONS%
+
+---++ Plugin Info
+
+|  Author: | Foswiki:Main.PluginAuthor |
+|  Copyright: | &copy; 2012, Foswiki Contributors |
+|  License: | GPL ([[http://www.gnu.org/copyleft/gpl.html][GNU General Public License]]) |
+|  Release: | %$RELEASE% |
+|  Version: | %$VERSION% |
+|  Change&nbsp;History: | <!-- versions below in reverse order -->&nbsp; |
+|  XX Mmm 20XX (1.0) | Description of change |
+|  Home: | http://foswiki.org/Extensions/%TOPIC% |
+|  Support: | http://foswiki.org/Support/%TOPIC% |
+

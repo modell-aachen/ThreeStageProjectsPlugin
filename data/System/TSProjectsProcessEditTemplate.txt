@@ -1,0 +1,11 @@
+%META:TOPICINFO{author="cgrams" date="1433232099" format="1.1" version="4"}%
+%{<verbatim class="tml">}%
+%TMPL:INCLUDE{"edit"}%
+%TMPL:INCLUDE{"TSProjectsBase"}%
+%{</verbatim>}%
+
+%{<verbatim class="tml">}%
+%TMPL:DEF{"formstart"}%%TMPL:P{"ProjectOutlineData"}%
+
+%TMPL:PREV%%TMPL:END%
+%{</verbatim>}%
