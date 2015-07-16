@@ -8,7 +8,6 @@
 Wiki pages:
    * Copy =_apps/ThreeStageProjcets= to your desired destination.
    * Customize the =WebPreferences=
-   * Correct the form in =ProjectTemplateBase=
 Configure:
    * Enable the plugin
 

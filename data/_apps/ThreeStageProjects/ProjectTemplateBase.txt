@@ -1,7 +1,7 @@
 %META:TOPICINFO{author="BaseUserMapping_333" date="1432295513" format="1.1" version="9"}%
 
 
-%META:FORM{name="_apps/ThreeStageProjects.TSProjectsProjectForm"}%
+%META:FORM{name="TSProjectsProjectForm"}%
 %META:FIELD{name="TopicTitle" attributes="" title="TopicTitle" value=""}%
 %META:FIELD{name="OrderNumber" attributes="" title="OrderNumber" value=""}%
 %META:FIELD{name="Customer" attributes="" title="Customer" value=""}%
