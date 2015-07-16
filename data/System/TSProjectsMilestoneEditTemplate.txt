@@ -30,7 +30,7 @@
 
 %{ <verbatim class="tml"> }%
 %TMPL:DEF{"MilestoneOutlineData"}%
-<div class="widgetBlockTitle">%MAKETEXT{"Cost unit outline data"}%</div>
+<div class="widgetBlockTitle">%MAKETEXT{"Milestone outline data"}%</div>
 <div class="widgetBlockContent">
 <table class="metaDataHead caldisable">
 <tr><td>%MAKETEXT{"Responsible"}%:</td><td>%RENDERFOREDIT{field="Responsible" format="$edit"}%</td></tr>

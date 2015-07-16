@@ -13,15 +13,15 @@
 %EDITTABLE{}%
 | *State* | *Allow Edit* | *Allow Move* | *Allow Tick* | *Message* | *State Type* |
 | NEW | LOGGEDIN | LOGGEDIN | nobody | This document is not yet in CIP. | draft |
-| INPROGRESS | %QUERY{"Responsible"}%, %QUERY{"'%SUBST{text="%TOPIC%" pattern="(%ProjectBasePrefix%\d+).*" format="$1%ProjectBaseSuffix%"}%'/ProjectManager"}%, ProjectKeyUserGroup | nobody |  | This cost unit is being worked on | draft |
-| CLOSED | %QUERY{"Responsible"}%, %QUERY{"'%SUBST{text="%TOPIC%" pattern="(%ProjectBasePrefix%\d+).*" format="$1%ProjectBaseSuffix%"}%'/ProjectManager"}%, ProjectKeyUserGroup | nobody | nobody | This cost unit has been achieved | draft |
+| INPROGRESS | %QUERY{"Responsible"}%, %QUERY{"'%SUBST{text="%TOPIC%" pattern="(%ProjectBasePrefix%\d+).*" format="$1%ProjectBaseSuffix%"}%'/ProjectManager"}%, ProjectKeyUserGroup | nobody |  | This milestone is being worked on | draft |
+| CLOSED | %QUERY{"Responsible"}%, %QUERY{"'%SUBST{text="%TOPIC%" pattern="(%ProjectBasePrefix%\d+).*" format="$1%ProjectBaseSuffix%"}%'/ProjectManager"}%, ProjectKeyUserGroup | nobody | nobody | This milestone has been achieved | draft |
  
 ---++ Transitions
 %EDITTABLE{}%
 | *State* | *Action* | *Next State* | *Allowed* | *Notify* | *Condition* | *Attribute* | *Warning* |
 | NEW | Create | INPROGRESS | LOGGEDIN, Main.KeyUserGroup | | | NEW | |
 | NEW | Put under CIP | INPROGRESS | LOGGEDIN, Main.KeyUserGroup | | | | |
-| INPROGRESS | Close cost unit | CLOSED | %QUERY{"Responsible"}%, %QUERY{"'%SUBST{text="%TOPIC%" pattern="(%ProjectBasePrefix%\d+).*" format="$1%ProjectBaseSuffix%"}%'/ProjectManager"}%, ProjectKeyUserGroup | | %IF{"0%FORMATLIST{"%%SUBST{text="%BASETOPIC%" pattern="^%ProjectBasePrefix%\d*" format=""}%Processes%" format="$percentIF{\"'%WEB%.%SUBST{text="%TOPIC%" pattern="(%ProjectBasePrefix%\d*).*$" format="$1"}%$1'/Due and '$percentWORKFLOWMETA{web=\"%WEB%\" topic=\"%SUBST{text="%TOPIC%" pattern="(%ProjectBasePrefix%\d*).*$" format="$1"}%$1\"}$percent'=~'^[IN]'\" then=\"1\"}$percent" separator=""}%" then="off" else="on"}% | REMARK | |
+| INPROGRESS | Close milestone | CLOSED | %QUERY{"Responsible"}%, %QUERY{"'%SUBST{text="%TOPIC%" pattern="(%ProjectBasePrefix%\d+).*" format="$1%ProjectBaseSuffix%"}%'/ProjectManager"}%, ProjectKeyUserGroup | | %IF{"0%FORMATLIST{"%%SUBST{text="%BASETOPIC%" pattern="^%ProjectBasePrefix%\d*" format=""}%Processes%" format="$percentIF{\"'%WEB%.%SUBST{text="%TOPIC%" pattern="(%ProjectBasePrefix%\d*).*$" format="$1"}%$1'/Due and '$percentWORKFLOWMETA{web=\"%WEB%\" topic=\"%SUBST{text="%TOPIC%" pattern="(%ProjectBasePrefix%\d*).*$" format="$1"}%$1\"}$percent'=~'^[IN]'\" then=\"1\"}$percent" separator=""}%" then="off" else="on"}% | REMARK | |
 | CLOSED | Re-open | INPROGRESS | %QUERY{"Responsible"}%, %QUERY{"'%SUBST{text="%TOPIC%" pattern="(%ProjectBasePrefix%\d+).*" format="$1%ProjectBaseSuffix%"}%'/ProjectManager"}%, ProjectKeyUserGroup | | | REMARK | |
 
 

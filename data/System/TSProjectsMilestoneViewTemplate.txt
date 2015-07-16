@@ -22,7 +22,7 @@
 
 %{<verbatim class="tml">}%
 %TMPL:DEF{"MilestoneOutlineData"}%
-<div class="widgetBlockTitle">%MAKETEXT{"Cost unit outline data"}%</div>
+<div class="widgetBlockTitle">%MAKETEXT{"Milestone outline data"}%</div>
 <div class="widgetBlockContent">
 <table class="atpSearch">
 <tr><td>%MAKETEXT{"Responsible"}%:</td><td>%RENDERFORDISPLAY{field="Responsible" format="$value"}%</td></tr>

@@ -23,7 +23,7 @@
 <div class="widgetBlockTitle">%MAKETEXT{"basic dates"}%</div>
 <div class="widgetBlockContent" id="qgates">
 <table class="metaDataHead">
-<tr><th>%MAKETEXT{"Cost unit"}%</th><th>%MAKETEXT{"Due date"}%</th><th>%MAKETEXT{"Responsible"}%</th><th style="width:100px;">%MAKETEXT{"Signal"}%</th></tr>
+<tr><th>%MAKETEXT{"Milestone"}%</th><th>%MAKETEXT{"Due date"}%</th><th>%MAKETEXT{"Responsible"}%</th><th style="width:100px;">%MAKETEXT{"Signal"}%</th></tr>
 <!-- MSs -->%FORMATLIST{"%ProjectMSs{default=""}%" format="$percentTMPL:P{\"qgateRowCheck\" gate=\"$1\"}$percent" separator=""}% <!-- /MSs -->
 </table>
 </div>
