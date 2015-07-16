@@ -1,255 +1,94 @@
-# Application: Projects
-# Foswiki translation for: Deutsch
+# Foswiki translation for Deutsch
+# Translators:
+# ModellAachen
 msgid ""
 msgstr ""
-"Project-Id-Version: Foswiki $Id\n"
+"Project-Id-Version: Three Stage Projects\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2013-07-03 00:09+0200\n"
-"Last-Translator: Modell Aachen <support@modell-aachen.de>\n"
-"Language-Team: Foswiki German Translation Team <none>\n"
+"PO-Revision-Date: 2014-08-21 17:19+0200\n"
+"Last-Translator: Modell Aachen <access@modell-aachen.de>\n"
+"Language-Team: German <http://translate.modell-aachen.de/projects/modacskin/"
+"releasenew-york/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.1.6\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 1.9\n"
+"X-POOTLE-MTIME: 1403098625.000000\n"
 
-#: WebHome
-msgid "Create new project"
-msgstr "Neues Projekt anlegen"
-
-#: WebHome
-msgid "Current projects"
-msgstr "Laufende Projekte"
-
-#: WebHome
-msgid "Project"
-msgstr "Projekt"
-
-#: WebHome, ProjectViewTemplate, ProjectEditTemplate
-msgid "Number"
-msgstr "KA-Nummer"
-
-#: WebHome, ProjectViewTemplate, ProjectEditTemplate
-msgid "Customer"
-msgstr "Kunde"
-
-#: WebHome, ProjectViewTemplate, ProjectEditTemplate
-msgid "Machine type"
-msgstr "Maschinentyp"
-
-#: WebHome, ProjectViewTemplate, ProjectEditTemplate
-msgid "Construction"
-msgstr "Konstruktion"
-
-
-#: WebHome, ProjectViewTemplate, ProjectEditTemplate
-msgid "Allocation"
-msgstr "Bereitstellung"
-
-#: WebHome, ProjectViewTemplate, ProjectEditTemplate
-msgid "Assembling"
-msgstr "Montage"
-
-#: WebHome, ProjectViewTemplate, ProjectEditTemplate
-msgid "Initiation"
-msgstr "Inbetriebnahme"
-
-#: WebHome, ProjectViewTemplate, ProjectEditTemplate
-msgid "Delivery date"
-msgstr "Liefertermin"
-
-#: WebHome, ProjectViewTemplate, ProjectEditTemplate
-msgid "Status"
-msgstr "Status"
-
-#: WebHome
-msgid "according to plan"
-msgstr "im Plan"
-
-#: WebHome
-msgid "to be discussed"
-msgstr "zu besprechen"
-
-#: WebHome
-msgid "Closed projects"
-msgstr "Abgeschlossene Projekte"
-
-#: WebHome, ProjectViewTemplate, ProjectEditTemplate
-msgid "Acceptance"
-msgstr "Kundenabnahme"
-
-#: WebHome, ProjectViewTemplate, ProjectEditTemplate
-msgid "Last payment"
-msgstr "Letzte Zahlung"
-
-#: WebHome, ProjectViewTemplate, ProjectEditTemplate
-msgid "End of guarantee"
-msgstr "Garantieende"
-
-#: CustomSkinCommentPluginTemplate
-msgid "Task creator"
-msgstr "Aufgabenersteller"
-
-#: CustomSkinCommentPluginTemplate
-msgid "Task to"
-msgstr "Verantwortlicher"
-
-#: CustomSkinCommentPluginTemplate
-msgid "Due date"
-msgstr "Termin"
-
-#: CustomSkinCommentPluginTemplate
-msgid "Task"
-msgstr "Aufgabe"
-
-#: CustomSkinCommentPluginTemplate, ProjectViewTemplate
 msgid "Add task"
 msgstr "Aufgabe hinzufügen"
 
-#: CustomSkinCommentPluginTemplate
-msgid "Task contents"
-msgstr "Aufgabeninhalt"
+msgid "Area of application"
+msgstr "Geltungsbereich"
 
-#: CustomSkinCommentPluginTemplate
-msgid "open"
-msgstr "offen"
+msgid "Available Information"
+msgstr "Verfügbare Informationen"
 
-#: CustomSkinCommentPluginTemplate
-msgid "closed"
-msgstr "erledigt"
-
-#: CustomSkinCommentPluginTemplate
-msgid "discarded"
-msgstr "verworfen"
-
-#: CustomSkinCommentPluginTemplate
-msgid "Project outline data"
-msgstr "Projekt-Rahmendaten"
-
-#: ProjectViewTemplate, ProjectEditTemplate
-msgid "Order number"
-msgstr "Auftragsnummer"
-
-#: ProjectViewTemplate, ProjectEditTemplate
-msgid "Booking number"
-msgstr "Buchungsnummer"
-
-#: ProjectViewTemplate, ProjectEditTemplate
-msgid "Contact person sales"
-msgstr "Ansprechpartner Vertrieb"
-
-#: ProjectViewTemplate, ProjectEditTemplate
-msgid "Order volume"
-msgstr "Auftragsvolumen"
-
-#: ProjectViewTemplate, ProjectEditTemplate
-msgid "Penalty"
-msgstr "Pönale"
-
-#: ProjectViewTemplate, ProjectEditTemplate
 msgid "basic dates"
 msgstr "Ecktermine"
 
-#: ProjectViewTemplate
+msgid "Checklist"
+msgstr "Checkliste"
+
+msgid "closed"
+msgstr "erledigt"
+
+msgid "Close milestone unit"
+msgstr "Meilenstein abschließen"
+
+msgid "Close project"
+msgstr "Projekt abschließen"
+
+msgid "corporation-wide"
+msgstr "unternehmensweit"
+
+msgid "Create"
+msgstr "Erstellen"
+
+msgid "Create new project"
+msgstr "Neues Projekt anlegen"
+
+msgid "Customer"
+msgstr "Kunde"
+
+msgid "discarded"
+msgstr "Verworfen"
+
+msgid "Discard project"
+msgstr "Projekt verwerfen"
+
 msgid "done"
 msgstr "erledigt"
 
-#: ProjectViewTemplate
-msgid "Hide"
-msgstr "Einklappen"
-
-#: ProjectViewTemplate
-msgid "Tasks assigned to their Quality-Gates"
-msgstr "Aufgabenzuordnung nach Quality-Gates"
-
-#: ProjectViewTemplate
-msgid "Submit"
-msgstr "Übernehmen"
-
-#: ProjectViewTemplate
-msgid "Tasks assigned to their status"
-msgstr "Aufgabenzuordnung nach Status"
-
-#: ProjectViewTemplate
-msgid "My tasks"
-msgstr "Meine Aufgaben"
-
-#: ProjectViewTemplate
-msgid "Open tasks"
-msgstr "offene Aufgaben"
-
-#: ProjectViewTemplate
-msgid "Closed tasks"
-msgstr "Erledigte Aufgaben"
-
-#: ProjectViewTemplate
-msgid "Discarded tasks"
-msgstr "Verworfene Aufgaben"
-
-#: ProjectViewTemplate
-msgid "All tasks"
-msgstr "Alle Aufgaben"
-
-#: ProjectViewTemplate
-msgid "Tasks"
-msgstr "Aufgaben"
-
-#: CustomSkinActionformTemplate
-msgid "Save"
-msgstr "Speichern"
-
-#: CustomSkinActionformTemplate
-msgid "Save"
-msgstr "Speichern"
-
-#: WebPreferences
-msgid "Date"
-msgstr "Datum"
-
-#: WebPreferences
-msgid "Creator"
-msgstr "Ersteller"
-
-#: WebPreferences
-msgid "Closed on"
-msgstr "Erledigt am"
-
-#: ProjectViewTemplate
-msgid "Projects web"
-msgstr "Projekte Bereich"
-
-#: ProjectViewTemplate
-msgid "Project name"
-msgstr "Projektname"
-
-#: ProjectViewTemplate
-msgid "Project manager"
-msgstr "Projektleiter"
-
-#: ProjectViewTemplate
-msgid "Quality gate"
-msgstr "Quality gate"
-
-#: ProjectViewTemplate
-msgid "Responsible"
-msgstr "Verantwortlich"
-
-#: ProjectViewTemplate
-msgid "Signal"
-msgstr "Ampel"
-
-#: MilestoneEditTemplate
 msgid "Due"
-msgstr "Fälligkeit"
+msgstr "Zieltermin"
 
-#: MilestoneEditTemplate
-msgid "Processes"
-msgstr "Prozesse"
+msgid "Due date"
+msgstr "Termin"
 
-msgid "My projects"
-msgstr "Meine Projekte"
+msgid "Finish process"
+msgstr "Prozess abschließen"
+
+msgid "Manage projects"
+msgstr "Projekte verwalten"
+
+msgid "Milestone"
+msgstr "Meilenstein"
+
+msgid "Milestone 1"
+msgstr "Meilenstein 1"
+
+msgid "Milestone 2"
+msgstr "Meilenstein 2"
+
+msgid "Milestone 3"
+msgstr "Meilenstein 3"
+
+msgid "Milestone outline data"
+msgstr "Meilenstein-Rahmendaten"
 
 msgid "My milestones"
 msgstr "Meine Meilensteine"
@@ -257,16 +96,161 @@ msgstr "Meine Meilensteine"
 msgid "My processes"
 msgstr "Meine Prozesse"
 
+msgid "My projects"
+msgstr "Meine Projekte"
+
+msgid "Norm classification"
+msgstr "Normzuordnung"
+
+msgid "open"
+msgstr "offen"
+
+msgid "Order number"
+msgstr "Auftragsnummer"
+
+msgid "Please choose a document type"
+msgstr "Bitte wählen Sie einen Dokumententyp"
+
+msgid "Please specify a distinct topic title"
+msgstr "Bitte geben Sie einen eindeutigen Seitentitel an"
+
+msgid "Process"
+msgstr "Prozess"
+
+msgid "Process description"
+msgstr "Prozessbeschreibung"
+
+msgid "Processes"
+msgstr "Prozesse"
+
+msgid "Project manager"
+msgstr "Projektleiter"
+
+msgid "Project name"
+msgstr "Projektname"
+
+msgid "Project outline data"
+msgstr "Projekt-Rahmendaten"
+
+msgid "Projects web"
+msgstr "Projekte Bereich"
+
+msgid "Put under CIP"
+msgstr "In KVP überführen"
+
+msgid "Remark:"
+msgstr "Bemerkung:"
+
+msgid "Re-open"
+msgstr "Wieder eröffen"
+
+msgid "Re-Open"
+msgstr ""
+
+msgid "Responsible"
+msgstr "Verantwortlich"
+
+msgid "Save"
+msgstr "Speichern"
+
+msgid "Signal"
+msgstr "Ampel"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Task"
+msgstr "Aufgabe"
+
+msgid "Task contents"
+msgstr "Aufgabeninhalt"
+
+msgid "Task creator"
+msgstr "Aufgabenersteller"
+
+msgid "Task to"
+msgstr "Aufgabe an"
+
+msgid "This document is not yet in CIP."
+msgstr "Dieses Dokument ist noch nicht im KVP."
+
+msgid "This milestone unit has been achieved"
+msgstr "Dieser Meilenstein wurde abgeschlossen"
+
+msgid "This milestone unit is being worked on"
+msgstr "Dieser Meilenstein wird gerade abgearbeitet"
+
+msgid "This process has been finished"
+msgstr "Dieser Prozess wurde abgeschlossen"
+
+msgid "This process is being worked on"
+msgstr "Dieser Prozess wird gerade abgearbeitet"
+
+msgid "This project has been achieved"
+msgstr "Diese Projekt wurde abgeschlossen"
+
+msgid "This project has been discarded"
+msgstr "Dieses Projekt wurde verworfen"
+
+msgid "This project is being worked on"
+msgstr "Diese Projekt wird zur Zeit abgearbeitet"
+
 msgid "Title"
 msgstr "Titel"
 
-msgid "Manage projects"
-msgstr "Projekte verwalten"
+msgid "Work instruction"
+msgstr "Arbeitsanweisung"
 
-#: MilestoneViewTemplate
-msgid "Milestone outline data"
-msgstr "Meilenstein-Rahmendaten"
+msgid "Project"
+msgstr "Projekt"
 
-#: ProcessViewTemplate
-msgid "Remark"
-msgstr "Bemerkung"
+msgid "Machine type"
+msgstr "Maschinentyp"
+
+msgid "Assembling"
+msgstr "Montage"
+
+msgid "Delivery date"
+msgstr "Liefertermin"
+
+msgid "according to plan"
+msgstr "im Plan"
+
+msgid "to be discussed"
+msgstr "zu besprechen"
+
+msgid "Acceptance"
+msgstr "Kundenabnahme"
+
+msgid "Last payment"
+msgstr "Letzte Zahlung"
+
+msgid "End of guarantee"
+msgstr "Garantieende"
+
+msgid "Booking number"
+msgstr "Buchungsnummer"
+
+msgid "Contact person sales"
+msgstr "Ansprechpartner Vertrieb"
+
+msgid "Order volume"
+msgstr "Auftragsvolumen"
+
+msgid "Penalty"
+msgstr "Pönale"
+
+msgid "Tasks assigned to their Quality-Gates"
+msgstr "Aufgabenzuordnung nach Quality-Gates"
+
+msgid "Submit"
+msgstr "Übernehmen"
+
+msgid "Tasks assigned to their status"
+msgstr "Aufgabenzuordnung nach Status"
+
+msgid "Closed on"
+msgstr "Erledigt am"
+
+msgid "Quality gate"
+msgstr "Quality gate"

@@ -24,6 +24,14 @@
 | INPROGRESS | Finish process | FINISHED | %QUERY{"Responsible"}%, %QUERY{"'%SUBST{text="%TOPIC%" pattern="(%ProjectBasePrefix%\d+).*" format="$1%ProjectBaseSuffix%"}%'/ProjectManager"}%, ProjectKeyUserGroup | %QUERY{"ProjectManager"}% | %IF{"$HASOPENTICKS" then="off"}% | REMARK | |
 | FINISHED | Re-Open | INPROGRESS |%QUERY{"Responsible"}%,  %QUERY{"'%SUBST{text="%TOPIC%" pattern="(%ProjectBasePrefix%\d+).*" format="$1%ProjectBaseSuffix%"}%'/ProjectManager"}%, ProjectKeyUserGroup | | | REMARK | |
 
+---++ Translations
+%MAKETEXT{"Create"}%
+%MAKETEXT{"Finish process"}%
+%MAKETEXT{"Put under CIP"}%
+%MAKETEXT{"Re-Open"}%
+%MAKETEXT{"This document is not yet in CIP."}%
+%MAKETEXT{"This process has been finished"}%
+%MAKETEXT{"This process is being worked on"}%
 
    * Set NOWYSIWYG=1
    * Set WORKFLOW=

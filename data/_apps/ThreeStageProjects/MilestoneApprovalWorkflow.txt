@@ -24,6 +24,13 @@
 | INPROGRESS | Close milestone | CLOSED | %QUERY{"Responsible"}%, %QUERY{"'%SUBST{text="%TOPIC%" pattern="(%ProjectBasePrefix%\d+).*" format="$1%ProjectBaseSuffix%"}%'/ProjectManager"}%, ProjectKeyUserGroup | | %IF{"0%FORMATLIST{"%%SUBST{text="%BASETOPIC%" pattern="^%ProjectBasePrefix%\d*" format=""}%Processes%" format="$percentIF{\"'%WEB%.%SUBST{text="%TOPIC%" pattern="(%ProjectBasePrefix%\d*).*$" format="$1"}%$1'/Due and '$percentWORKFLOWMETA{web=\"%WEB%\" topic=\"%SUBST{text="%TOPIC%" pattern="(%ProjectBasePrefix%\d*).*$" format="$1"}%$1\"}$percent'=~'^[IN]'\" then=\"1\"}$percent" separator=""}%" then="off" else="on"}% | REMARK | |
 | CLOSED | Re-open | INPROGRESS | %QUERY{"Responsible"}%, %QUERY{"'%SUBST{text="%TOPIC%" pattern="(%ProjectBasePrefix%\d+).*" format="$1%ProjectBaseSuffix%"}%'/ProjectManager"}%, ProjectKeyUserGroup | | | REMARK | |
 
+---++ Translations:
+%MAKETEXT{"Close milestone"}%
+%MAKETEXT{"Create"}%
+%MAKETEXT{"Put under CIP"}%
+%MAKETEXT{"Re-open"}%
+%MAKETEXT{"This milestone has been achieved"}%
+%MAKETEXT{"This milestone is being worked on"}%
 
    * Set NOWYSIWYG=1
    * Set WORKFLOW=

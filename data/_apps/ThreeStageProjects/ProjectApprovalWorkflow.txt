@@ -27,6 +27,15 @@
 | CLOSED | Re-open | INPROGRESS | %QUERY{"ProjectManager"}%, ProjectKeyUserGroup  | | | REMARK | |
 | DISCARDED | Re-open | INPROGRESS |%QUERY{"ProjectManager"}%, ProjectKeyUserGroup | | | REMARK | |
 
+--++ Translations
+%MAKETEXT{"Close project"}%
+%MAKETEXT{"Create"}%
+%MAKETEXT{"Discard project"}%
+%MAKETEXT{"Put under CIP"}%
+%MAKETEXT{"Re-open"}%
+%MAKETEXT{"This project has been achieved"}%
+%MAKETEXT{"This project has been discarded"}%
+%MAKETEXT{"This project is being worked on"}%
 
    * Set NOWYSIWYG=1
    * Set WORKFLOW=
