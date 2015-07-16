@@ -14,12 +14,11 @@ data/_apps/ThreeStageProjects/MSTemplate.txt 0644
 data/_apps/ThreeStageProjects/MilestoneApprovalWorkflow.txt 0644
 data/_apps/ThreeStageProjects/PortalViewTemplate.txt 0644
 data/_apps/ThreeStageProjects/ProcessApprovalWorkflow.txt 0644
-data/_apps/ThreeStageProjects/ProcessForm.txt 0644
 data/_apps/ThreeStageProjects/ProjectApprovalWorkflow.txt 0644
 data/_apps/ThreeStageProjects/ProjectTemplate.txt 0644
 data/_apps/ThreeStageProjects/ProjectTemplateBase.txt 0644
 data/_apps/ThreeStageProjects/TSProjectsMilestoneForm.txt 0644
-data/_apps/ThreeStageProjects/TSProjectsMilestoneForm.txt 0644
+data/_apps/ThreeStageProjects/TSProjectsProjectForm.txt 0644
 data/_apps/ThreeStageProjects/WebActions.txt 0644
 data/_apps/ThreeStageProjects/WebAtom.txt 0644
 data/_apps/ThreeStageProjects/WebChanges.txt 0644
