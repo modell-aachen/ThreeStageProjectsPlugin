@@ -149,10 +149,14 @@ format="<tr><td>[[$web.$topic][$title]]</td><td>$process_state_s</td><td>$field_
   </td>
 </tr>
 </tbody></table>
-<!-- Processes -->%FORMATLIST{"%ProjectMSs{default=""}%" format="<input type='hidden' name='slave_$1' value='$percent$1Processes$percent' />$percentFORMATLIST{\"$percent$1Processes$percent\" format=\"<input type='hidden' name='$dollar1Template' value='$dollarpercent$dollar1Template$dollarpercent' />\" separator=\"\"}$percent" separator=""}%<!-- /Processes -->
+<!-- Processes -->%FORMATLIST{"%ProjectMSs{default=""}%" format="<input type='hidden' name='slave_$1' value='$percent$1Processes$percent' />$percentFORMATLIST{\"$percent$1Processes$percent\" format=\"%TMPL:P{"ProcessesActions"}%\" separator=\"\"}$percent" separator=""}%<!-- /Processes -->
 </form>
 </div>
 %TMPL:END%
+%{ </verbatim> }%
+
+%{ <verbatim class="tml"> }%
+%TMPL:DEF{"ProcessesActions"}%<input type='hidden' name='$dollar1Template' value='$dollarpercent$dollar1Template$dollarpercent' /><input type='hidden' name='SetPref_$dollar1_WORKFLOW' value='%ProcessWorkflow{default="ProcessApprovalWorkflow"}%' /><input type='hidden' name='SetForm_$dollar1' value='%ProcessForm{default="DocumentForm"}%' />%TMPL:END%
 %{ </verbatim> }%
 
 %{ <verbatim class="tml"> }%

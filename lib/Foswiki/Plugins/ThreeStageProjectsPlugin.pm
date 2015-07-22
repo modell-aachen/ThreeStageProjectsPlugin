@@ -236,7 +236,8 @@ sub _autoinc {
         my $parent;
         my $master = $masters->{$suffixlist[$i]};
         if($master) {
-            $urlparam = $urlparams->{$master};
+            $urlparam = $urlparams->{$suffixlist[$i]};
+            $urlparam->{Update} = ($urlparam->{Update}, $urlparams->{$master}->{Update});
             $parent = "$prefix$next$master";
         } else {
             $urlparam = $urlparams->{$suffixlist[$i]};
@@ -259,10 +260,20 @@ sub _getUrlParams {
 
     foreach my $param ($query->param()) {
         next unless ($param =~ m#^[A-Z]#);
-        if($param =~ m#^Update_(.*?)_(.*)$#) {
-            $urlparams->{$1}->{$2} = $query->param($param); # TODO: multiple instances of $1
+        # Action_Suffix_Name or Action_Name
+        # Update_$suffix_$field SetField_$suffix_$field SetForm_$suffix Append_$suffix RemoveField_$suffix SetPref_$suffix_$preference
+        # Anything else is a formfield
+        if($param =~ m#^(SetForm|RemoveField|RemovePref|Append)_(.*)$#) {
+            $urlparams->{$2}->{$1} = $query->param($param);
+        } elsif($param =~ m#^(SetForm|RemoveField|RemovePref|Append)$#) {
+            $urlparams->{$basesuffix}->{$1} = $query->param($param);
+        } elsif($param =~ m#^([A-Za-z]*)_(.*?)_(.*)$#) {
+            $urlparams->{$2}->{$1}->{$3} = $query->param($param);
+        } elsif($param =~ m#^([A-Za-z]*)_(.*?)$#) {
+            $urlparams->{$basesuffix}->{$1}->{$2} = $query->param($param);
         } else {
-            $urlparams->{$basesuffix}->{$param} = $query->param($param); # TODO: multiple instances of $param
+            next if ($param =~ m#Template$#);
+            $urlparams->{$basesuffix}->{Update}->{$param} = $query->param($param);
         }
     }
 
@@ -292,10 +303,10 @@ sub _updateBase {
         my $eachtopic = "$base$suffix";
         my ($meta, $text) = Foswiki::Func::readTopic($baseweb, $eachtopic);
         my $dirty = 0;
-        foreach my $param ( keys %{$urlparams->{$suffix}} ) {
+        foreach my $param ( keys %{$urlparams->{$suffix}->{Update}} ) {
             my $old = $meta->get('FIELD', $param);
-            unless ( $old && $old->{value} eq $urlparams->{$suffix}{$param} ) {
-                $meta->putKeyed( 'FIELD', { name => $param, title => $param, value => $urlparams->{$suffix}{$param} } );
+            unless ( $old && $old->{value} eq $urlparams->{$suffix}->{Update}->{$param} ) {
+                $meta->putKeyed( 'FIELD', { name => $param, title => $param, value => $urlparams->{$suffix}->{Update}->{$param} } );
                 $dirty = 1;
             }
         }
@@ -321,6 +332,7 @@ sub _copyTopic {
     $newMeta->remove('PREFERENCE', 'WORKFLOW');
     $newMeta->remove('PREFERENCE', 'ALLOWTOPICCOMMENT');
 
+    # Handle actions in meta
     my $setPref = $newMeta->get('PREFERENCE', 'SetPref');
     my $remField = $newMeta->get('PREFERENCE', 'RemoveField');
     my $append = $newMeta->get('PREFERENCE', 'Append');
@@ -351,16 +363,52 @@ sub _copyTopic {
         $appendValue = Foswiki::Func::expandCommonVariables($appendValue, $newMeta);
         $text .= $appendValue;
     }
+    # /Handle actions in meta
+
+    # Handle actions in params
+    if($params->{SetPref}) {
+        foreach my $pref ( keys %{$params->{SetPref}} ) {
+            my $val = Foswiki::Func::decodeFormatTokens($params->{SetPref}->{$pref});
+            $val = Foswiki::Func::expandCommonVariables($val, $meta);
+            $newMeta->remove('PREFERENCE', $pref);
+            $newMeta->put('PREFERENCE', { name => $pref, value => $val });
+        }
+    }
+
+    if($params->{RemoveField}) {
+        while($params->{RemoveField} =~ m#([^,\s]+)#g) {
+            my $field = $1;
+            $newMeta->remove('FIELD', $field);
+        }
+    }
+
+    if($params->{RemovePref}) {
+        while($params->{RemovePref} =~ m#([^,\s]+)#g) {
+            my $field = $1;
+            $newMeta->remove('PREFERENCE', $field);
+        }
+    }
+
+    if($params->{SetForm}) {
+        $newMeta->remove('FORM');
+        $newMeta->put('FORM', { name => $params->{SetForm} });
+    }
+
+    if($params->{Append}) {
+        my $appendValue = Foswiki::Func::decodeFormatTokens($params->{Append});
+        $appendValue = Foswiki::Func::expandCommonVariables($appendValue, $newMeta);
+        $text .= $appendValue;
+    }
+
+    foreach my $field ( keys %{$params->{Update}} ) {
+        $newMeta->putKeyed('FIELD', { name => $field, title=> $field, value => $params->{Update}->{$field}});
+    }
+    # /Handle actions in params
 
     if($parentTopic) {
         my $parent = $parentTopic;
         $parent = "$parent.$parentWeb" if $parentWeb && $parentWeb ne $targetWeb;
         $newMeta->put('TOPICPARENT', { name => $parent });
-    }
-
-    foreach my $field ( keys %$params ) {
-        next if $field =~ m#Template$#;
-        $newMeta->putKeyed('FIELD', { name => $field, title=> $field, value => $params->{$field}});
     }
 
     # insert checkboxes

@@ -55,6 +55,12 @@ For example =ProjectBasePrefix = Project= and =ProjectSuffix = Base= corresponds
    * Set ProjectBasePrefix = Project
    * Set ProjectBaseSuffix = Base
 
+Optional: Form for processes
+#   * Set ProcessForm = DocumentForm
+
+Optional: Workflow for processes
+#   * Set ProcessWorkflow = ProcessApprovalWorkflow
+
 Set your quality gates here. You can set as many gates as you want. The value you set here will be used as prefix for each setting.
    * Set ProjectMSs = MS1, MS2, MS3
 
