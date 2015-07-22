@@ -407,7 +407,7 @@ sub _copyTopic {
 
     if($parentTopic) {
         my $parent = $parentTopic;
-        $parent = "$parent.$parentWeb" if $parentWeb && $parentWeb ne $targetWeb;
+        $parent = "$parentWeb.$parent" if $parentWeb && $parentWeb ne $targetWeb;
         $newMeta->put('TOPICPARENT', { name => $parent });
     }
 
