@@ -237,7 +237,10 @@ sub _autoinc {
         my $master = $masters->{$suffixlist[$i]};
         if($master) {
             $urlparam = $urlparams->{$suffixlist[$i]};
-            $urlparam->{Update} = ($urlparam->{Update}, $urlparams->{$master}->{Update});
+            $urlparam->{Update} = {
+                ($urlparam->{Update} ? %{$urlparam->{Update}} : ()),
+                ($urlparams->{$master}->{Update} ? %{$urlparams->{$master}->{Update}} : ())
+            };
             $parent = "$prefix$next$master";
         } else {
             $urlparam = $urlparams->{$suffixlist[$i]};
