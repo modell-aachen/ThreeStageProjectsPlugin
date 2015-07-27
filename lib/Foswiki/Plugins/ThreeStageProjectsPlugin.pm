@@ -415,7 +415,7 @@ sub _copyTopic {
     }
 
     # insert checkboxes
-    $text =~ s#(<table.*?</table)#tickTable($1)#igmes;
+    $text =~ s#(<table.*?</table)#tickTable($1)#imes;
 
     $newMeta->text($text);
     $newMeta->save();
