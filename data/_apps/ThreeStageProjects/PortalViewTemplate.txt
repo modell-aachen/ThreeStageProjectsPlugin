@@ -1,4 +1,3 @@
-%META:TOPICINFO{author="cgrams" date="1432306551" format="1.1" version="16"}%
 %TMPL:INCLUDE{"SystemView"}%
 
 %{ <verbatim class="tml"> }%

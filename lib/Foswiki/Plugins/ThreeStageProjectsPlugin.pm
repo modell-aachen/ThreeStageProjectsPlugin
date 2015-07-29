@@ -325,6 +325,14 @@ sub _updateBase {
     return undef;
 }
 
+#    * $session: Foswiki session
+#    * $scrWeb: Source web
+#    * $srcTopic: Source topic
+#    * $targetWeb: Target web
+#    * $targetTopic: Target topic
+#    * $parentWeb: Web of the topicparent (optional)
+#    * $parentTopic: Topicparent will be set to this (optional)
+#    * $params: Hash to actions
 sub _copyTopic {
     my ( $session, $srcWeb, $srcTopic, $targetWeb, $targetTopic, $parentWeb, $parentTopic, $params ) = @_;
 

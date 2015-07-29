@@ -1,4 +1,3 @@
-%META:TOPICINFO{author="cgrams" date="1433231890" format="1.1" version="10"}%
 %{ <verbatim class="tml"> }%
 %TMPL:INCLUDE{view}%
 %TMPL:INCLUDE{"TSProjectsBase"}%
@@ -13,12 +12,101 @@
 %TMPL:DEF{"content"}%%INCLUDE{"%SYSTEMWEB%/JSCalendarContribInline"}%
 %TMPL:P{"ProjectOutlineData"}%
 
+%TMPL:P{"contentTasks"}%
+
 %TEXT%
 
 %TMPL:P{"MilestoneOutlineData"}%
 %TMPL:P{"Processes"}%
 %TMPL:END%
 %{ </verbatim> }%
+
+
+%{
+ This will generate a tab for a JQuery TABPANE.
+ If there are multiple ways available to generate this tab, here would be the appropriate place to decide which one to use.
+ By default it will create a tab that fetches its contents via ajax but not if this the print cover is being used.
+
+ Parameters:
+   * section: Template definition to appear in the tab (like TMPL:P{%section%}).
+   * label: Label for the tab.
+   * id: Id-parameter for the tab.
+   * noprint: If this section should be printed by default, you can issue it to be printed with the url-parameter printTab=%section%.
+}%
+%TMPL:DEF{"modacTab"}%%IF{"$'URLPARAM{cover}' = 'print' and ('%noprint%' != '1' and $'URLPARAM{printTab}'='' or $'URLPARAM{printTab}'='%section%')"
+then="$percntTMPL:P{\"modacNoAjaxTab\" label=\"%label%\" id=\"%id%\" section=\"%section%\"}$percent"
+else="$percntTMPL:P{\"modacAjaxTab\" label=\"%label%\" id=\"%id%\" section=\"%section%\"}$percent"
+}% %TMPL:END%
+
+%{
+ This will generate a tab without the need to fetch contents per ajax. This tab can be printed.
+
+ Parameters: section, label and id like modacTab
+}%
+%TMPL:DEF{"modacNoAjaxTab"}%%TAB{"%label%" id="%id%"}%
+%TMPL:P{"%section%"}%
+%ENDTAB%%TMPL:END%
+
+%{
+ This will generate a tab that will fetch its contents via ajax. This tab can not be printed.
+
+ Parameters: section, label and id like modacTab
+}%
+%TMPL:DEF{"modacAjaxTab"}%%TAB{"%label%" id="%id%" url="%SCRIPTURLPATH{rest}%/RenderPlugin/template?topic=%WEB%.%TOPIC%;expand=%section%;render=on;name=TSProjectsProjectView%IF{"defined state" then=";state=%URLPARAM{"state"}%"}%"}%
+<span class="jqAjaxLoader">&nbsp;</span>
+%ENDTAB%%TMPL:END%
+
+%TMPL:DEF{"milestoneall_label"}%%MAKETEXT{"All milestones"}%%TMPL:END%
+%TMPL:DEF{"milestone1_label"}%%MS1Label%%TMPL:END%
+%TMPL:DEF{"milestone2_label"}%%MS2Label%%TMPL:END%
+%TMPL:DEF{"milestone3_label"}%%MS3Label%%TMPL:END%
+%TMPL:DEF{"milestone4_label"}%%MS4Label%%TMPL:END%
+%TMPL:DEF{"milestone5_label"}%%MS5Label%%TMPL:END%
+
+%{ <verbatim class="tml"> }%
+%TMPL:DEF{"contentTasks"}%
+<div class="widgetBlockTitle">%MAKETEXT{"Tasks"}%</div>
+<div class="widgetBlockContent">
+<div class="modacPrintHide">
+%BUTTON{"%MAKETEXT{"Add task"}%" href="#actiondialog" class="jqUIDialogLink"}%
+%STARTSECTION{"actiondialog"}%
+<div id="actiondialog" title="%MAKETEXT{"Add task"}%" class="jqUIDialog {draggable:true, resizable: true, height:400, width:600}">
+%COMMENT{type="TStaskMS"  location="This should be unique text AIVOqxWgyT"}%
+<div style="display:none;">This should be unique text AIVOqxWgyT%ACTIONSEARCH{web="%WEB%" topic="DummyTopic"}%</div>
+</div>
+</div>%AMPEL{QUERY=".SignalTasks" DATE="%MAKETEXT{"Due date"}%" DST="%MAKETEXT{"Signal"}%" DONE="%MAKETEXT{"Signal"}%" COND="FINISHED" WARN="%SIGNAL_PREWARNTIME{default="7"}%"}%
+%ENDSECTION{"actiondialog"}%
+
+<div class="widgetBlockTitle">%MAKETEXT{"Tasks assigned to their milestones"}%</div>
+<div class="widgetBlockContent">
+%TMPL:P{"tasks_milestoneall"}%
+</div>
+</div>
+%TMPL:END%
+
+%TMPL:DEF{"task_filter"}%
+<form name="input" action="%SCRIPTURL{"view"}%/%BASEWEB%/%BASETOPIC%" method="get">
+<input type="hidden" name="tab" value="%opentab%">
+<select name="state" onChange="this.form.submit()"><option value="open" %IF{"'%URLPARAM{"state"}%'='open'" then="selected"}%>%MAKETEXT{"Open tasks"}%</option><option value="closed" %IF{"'%URLPARAM{"state"}%'='closed'" then="selected"}%>%MAKETEXT{"Closed tasks"}%</option><option value="discarded" %IF{"'%URLPARAM{"state"}%'='discarded'" then="selected"}%>%MAKETEXT{"Discarded tasks"}%</option><option value="open|closed|discarded" %IF{"'%URLPARAM{"state"}%'='open|closed|discarded'" then="selected"}%>%MAKETEXT{"All tasks"}%</option></select>
+</form>
+%TMPL:END%
+
+%TMPL:DEF{"searchactions"}%
+%ACTIONSEARCH{milestone="%TMPL:P{"basetopicsuffix"}%" who="%who%" web="%WEB%" topic="%TMPL:P{"projecttopic"}%" state="%URLPARAM{"state" default="open"}%" sort="$createdate,$who,$due" jqsortable="1" jqsortopts="widgets: ['zebra'], sortList: [[0,1],[0,1]], headers: { 1: { sorter: 'qwikiDate' }, 6: { sorter: 'qwikiDate' }, 10: { sorter: false } }"}%
+%TMPL:END%
+
+%{ Contents for the 'milestoneall' tab. }%
+%TMPL:DEF{"tasks_milestoneall"}%
+%TMPL:P{"printButton" section="tasks_milestoneall"}%
+%TMPL:P{"task_filter" opentab="all"}%
+<div class="SignalTasks">%TMPL:P{"searchactions" milestone="*" who="*"}%</div>
+%TMPL:END%
+
+%TMPL:DEF{"printButton"}%%IF{"context MAPrinceModPluginEnabled"
+then="<div class='atpExportFrame'><a href=\"%SCRIPTURL{"view"}%/%SYSTEMWEB%/MAPrinceModPrintDialog?skin=text&section=dialog&pweb=%ENCODE{"%INCLUDINGWEB%" type="url"}%&ptopic=%ENCODE{"%INCLUDINGTOPIC%" type="url"}%&landscape=%LANDSCAPE{default="0"}%&printParams=printTab,DaysClosed&printTab=%section%&DaysClosed=%URLPARAM{"DaysClosed"}%\" class=\"jqUIDialogLink {cache:false} modacPrintHide atpExportButton\" title='%MAKETEXT{"Export these tasks to PDF"}%'>$percentICON{pdf}$percent</a></div>" else="<!-- no print -->"}%%TMPL:END%
++
+
+
 
 %{<verbatim class="tml">}%
 %TMPL:DEF{"MilestoneOutlineData"}%

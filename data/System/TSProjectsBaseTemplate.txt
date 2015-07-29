@@ -1,4 +1,3 @@
-%META:TOPICINFO{author="cgrams" date="1433231914" format="1.1" version="8"}%
 %{ <verbatim class="tml"> }%
 %TMPL:DEF{"modacButtonsLEFT"}%<li><div class='modacActionButtonACTIVE'><a href="%SCRIPTURL{view}%/%WEB%/%TOPIC%">%MAKETEXT{"Projects web"}%</a></div></li>%TMPL:END%
 %{ </verbatim> }%
