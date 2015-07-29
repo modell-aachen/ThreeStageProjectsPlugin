@@ -36,7 +36,7 @@ msgstr "Checkliste"
 msgid "closed"
 msgstr "erledigt"
 
-msgid "Close milestone unit"
+msgid "Close milestone"
 msgstr "Meilenstein abschließen"
 
 msgid "Close project"
@@ -71,6 +71,9 @@ msgstr "Termin"
 
 msgid "Finish process"
 msgstr "Prozess abschließen"
+
+msgid "Info page"
+msgstr "Infoseite"
 
 msgid "Manage projects"
 msgstr "Projekte verwalten"
@@ -144,9 +147,6 @@ msgstr "Bemerkung:"
 msgid "Re-open"
 msgstr "Wieder eröffen"
 
-msgid "Re-Open"
-msgstr ""
-
 msgid "Responsible"
 msgstr "Verantwortlich"
 
@@ -174,10 +174,10 @@ msgstr "Aufgabe an"
 msgid "This document is not yet in CIP."
 msgstr "Dieses Dokument ist noch nicht im KVP."
 
-msgid "This milestone unit has been achieved"
+msgid "This milestone has been achieved"
 msgstr "Dieser Meilenstein wurde abgeschlossen"
 
-msgid "This milestone unit is being worked on"
+msgid "This milestone is being worked on"
 msgstr "Dieser Meilenstein wird gerade abgearbeitet"
 
 msgid "This process has been finished"
@@ -200,57 +200,3 @@ msgstr "Titel"
 
 msgid "Work instruction"
 msgstr "Arbeitsanweisung"
-
-msgid "Project"
-msgstr "Projekt"
-
-msgid "Machine type"
-msgstr "Maschinentyp"
-
-msgid "Assembling"
-msgstr "Montage"
-
-msgid "Delivery date"
-msgstr "Liefertermin"
-
-msgid "according to plan"
-msgstr "im Plan"
-
-msgid "to be discussed"
-msgstr "zu besprechen"
-
-msgid "Acceptance"
-msgstr "Kundenabnahme"
-
-msgid "Last payment"
-msgstr "Letzte Zahlung"
-
-msgid "End of guarantee"
-msgstr "Garantieende"
-
-msgid "Booking number"
-msgstr "Buchungsnummer"
-
-msgid "Contact person sales"
-msgstr "Ansprechpartner Vertrieb"
-
-msgid "Order volume"
-msgstr "Auftragsvolumen"
-
-msgid "Penalty"
-msgstr "Pönale"
-
-msgid "Tasks assigned to their Quality-Gates"
-msgstr "Aufgabenzuordnung nach Quality-Gates"
-
-msgid "Submit"
-msgstr "Übernehmen"
-
-msgid "Tasks assigned to their status"
-msgstr "Aufgabenzuordnung nach Status"
-
-msgid "Closed on"
-msgstr "Erledigt am"
-
-msgid "Quality gate"
-msgstr "Quality gate"
