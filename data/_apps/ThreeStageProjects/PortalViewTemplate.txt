@@ -81,15 +81,19 @@ format="<tr><td>[[$web.$topic][$title]]</td><td>$process_state_s</td><td>$field_
 <div class="widgetBlockTitle">%MAKETEXT{"Manage projects"}%</div>
 <div class="widgetBlockContent">
 %TABPANE{select="%URLPARAM{"tab"}%" class="simple"}%
-%TMPL:P{"searchProjects" label="open" id="open" status="INPROGRESS"}%
-%TMPL:P{"searchProjects" label="closed" id="closed" status="(* -INPROGRESS)"}%
+%TMPL:P{"searchProjects" label="$percentTMPL:P{Maketextopen}$percent" id="open" status="INPROGRESS"}%
+%TMPL:P{"searchProjects" label="$percentTMPL:P{Maketextclosed}$percent" id="closed" status="(* -INPROGRESS)"}%
 %ENDTABPANE%
 </div>
 %TMPL:END%
 %{ </verbatim> }%
 
+%{ <verbatim class="tml"> }%%TMPL:DEF{"Maketextopen"}%%MAKETEXT{"open"}%%TMPL:END%%{ </verbatim> }%
+
+%{ <verbatim class="tml"> }%%TMPL:DEF{"Maketextclosed"}%%MAKETEXT{"closed"}%%TMPL:END%%{ </verbatim> }%
+
 %{ <verbatim class="tml"> }%
-%TMPL:DEF{"searchProjects"}%%TAB{"%label%" id="%id%"}%
+%TMPL:DEF{"searchProjects"}%%TAB{"%IF{"1" then="%label%"}%" id="%id%"}%
 %SOLRSEARCH{"web:%ProjectWeb{default="%BASEWEB%"}% type:topic topic:(%ProjectBasePrefix%* *%ProjectBaseSuffix%) process_state_s:%status%"
  rows="999"
  header="<table id='searchProjects%id%' class='metaDataHead'>
