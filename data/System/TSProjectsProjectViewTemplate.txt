@@ -28,7 +28,8 @@
 </table>
 </div>
 %AMPEL{"qgates" DATE="%MAKETEXT{"Due date"}%" DST="%MAKETEXT{"Signal"}%" DONE="%MAKETEXT{"Signal"}%" COND="CLOSED" WARN="%SIGNAL_PREWARNTIME{default="7"}%" REDOVERRIDE="RED" AMBEROVERRIDE="AMBER"}%
-%AMPEL{QUERY=".processTable" DATE="Date" DST="Signal" DONE="Signal" COND="FINISHED" WARN="%SIGNAL_PREWARNTIME{default="7"}%"}%
+%AMPEL{QUERY=".processTable" DATE="Date" DST="Signal" DONE="Signal" COND="CLOSED" WARN="%SIGNAL_PREWARNTIME{default="7"}%" REDOVERRIDE="RED" AMBEROVERRIDE="AMBER"}%
+%AMPEL{QUERY=".SignalTasks" DATE="%MAKETEXT{"Due date"}%" DST="%MAKETEXT{"Signal"}%" DONE="%MAKETEXT{"Signal"}%" COND="FINISHED" WARN="%SIGNAL_PREWARNTIME{default="7"}%"}%
 %TMPL:END%
 %{ </verbatim> }%
 
