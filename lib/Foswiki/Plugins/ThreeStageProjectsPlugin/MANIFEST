@@ -34,5 +34,6 @@ data/_apps/ThreeStageProjects/WebSearchAdvanced.txt 0644
 data/_apps/ThreeStageProjects/WebStatistics.txt 0644
 data/_apps/ThreeStageProjects/WebTopicList.txt 0644
 lib/Foswiki/Plugins/ThreeStageProjectsPlugin.pm 0444 Plugin Perl module
+locale/ThreeStageProjects/de.po 0664
 pub/System/ThreeStageProjectsPlugin/projectapp.css 0644
 pub/System/ThreeStageProjectsPlugin/projectapp.js 0644
