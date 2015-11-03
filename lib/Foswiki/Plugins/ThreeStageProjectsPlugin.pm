@@ -43,7 +43,7 @@ sub initPlugin {
 
     Foswiki::Func::registerRESTHandler(
         'tick', \&_tick,
-        http_allow => 'POST' );
+        http_allow => 'POST', validate => 0, authenticate => 1 );
 
     Foswiki::Func::registerTagHandler(
         'TICK', \&_TICK );
