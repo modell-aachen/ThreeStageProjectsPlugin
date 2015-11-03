@@ -271,7 +271,12 @@ sub _getUrlParams {
         } elsif($param =~ m#^(SetForm|RemoveField|RemovePref|Append)$#) {
             $urlparams->{$basesuffix}->{$1} = $query->param($param);
         } elsif($param =~ m#^([A-Za-z]*)_(.*?)_(.*)$#) {
-            $urlparams->{$2}->{$1}->{$3} = $query->param($param);
+            my $action = $1;
+            my $topics = $2;
+            my $field = $2;
+            foreach my $topic (split(':', $topics)) {
+                $urlparams->{$topic}->{$action}->{$field} = $query->param($param);
+            }
         } elsif($param =~ m#^([A-Za-z]*)_(.*?)$#) {
             $urlparams->{$basesuffix}->{$1}->{$2} = $query->param($param);
         } else {
