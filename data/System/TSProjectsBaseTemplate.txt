@@ -8,8 +8,8 @@
 
 %{ <verbatim class="tml"> }%
 %TMPL:DEF{"ProjectOutlineData"}%<div class="widgetBlockTitle">%MAKETEXT{"Project outline data"}%</div>
-<div class="atpSearch widgetBlockContent">
-<table class="metaDataHead">
+<div class="widgetBlockContent">
+<table class="atpSearch">
 <tr>
   <td>%MAKETEXT{"Order number"}%:</td><td width="300px">%RENDERFORDISPLAY{topic="%TMPL:P{"projecttopic"}%" field="OrderNumber" format="$value"}%</td>
   <td>%MAKETEXT{"Customer"}%:</td><td>%RENDERFORDISPLAY{topic="%TMPL:P{"projecttopic"}%" field="Customer" format="$value"}%</td>
