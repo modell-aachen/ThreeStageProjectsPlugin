@@ -3,7 +3,7 @@
 %{ </verbatim> }%
 
 %{ <verbatim class="tml"> }%
-%TMPL:DEF{"script"}%%JQREQUIRE{"ui::dialog, ui::button, textboxlist, blockui"}%%ADDTOZONE{"script" id="tableScript" text="<script type='text/javascript' src='%PUBURLPATH%/%SYSTEMWEB%/ThreeStageProjectsPlugin/projectapp.js'></script>" requires="JQUERYPLUGIN::FOSWIKI::PREFERENCES"}%%ADDTOZONE{"head" id="tableStyle" text="<style type='text/css'>@import url('%PUBURLPATH%/%SYSTEMWEB%/ThreeStageProjectsPlugin/projectapp.css');</style>"}%%TMPL:PREV%%TMPL:END%
+%TMPL:DEF{"script"}%%JQREQUIRE{"ui::dialog, ui::button, textboxlist, blockui"}%%ADDTOZONE{"script" id="tableScript" text="<script type='text/javascript' src='%PUBURLPATH%/%SYSTEMWEB%/ThreeStageProjectsPlugin/projectapp.js'></script>" requires="JQUERYPLUGIN::FOSWIKI::PREFERENCES"}%%ADDTOZONE{"head" id="tableStyle" text="<style type='text/css'>@import url('%PUBURLPATH%/%SYSTEMWEB%/ThreeStageProjectsPlugin/projectapp.css');</style>"}%%IF{"$LANGUAGE='de'" then="$percentADDTOZONE{\"script\" id=\"tableScript:jsi18n\" text=\"<script type='text/javascript' src='%PUBURLPATH%/%SYSTEMWEB%/ThreeStageProjectsPlugin/jsi18n.de.js'></script>\" requires=\"$percentJSI18NID$percent\"}$percent"}%%TMPL:PREV%%TMPL:END%
 %{ </verbatim> }%
 
 %{ <verbatim class="tml"> }%
