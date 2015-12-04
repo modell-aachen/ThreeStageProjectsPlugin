@@ -1,4 +1,3 @@
-%META:TOPICINFO{author="cgrams" date="1433231283" format="1.1" version="6"}%
 %{ <verbatim class="tml"> }%
 %TMPL:INCLUDE{edit}%
 %TMPL:INCLUDE{"TSProjectsBase"}%

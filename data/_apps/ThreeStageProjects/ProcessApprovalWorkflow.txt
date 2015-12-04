@@ -1,4 +1,3 @@
-%META:TOPICINFO{author="cgrams" date="1432307131" format="1.1" version="9"}%
 ---++ Defaults
 %TWISTY%
 %EDITTABLE{}%

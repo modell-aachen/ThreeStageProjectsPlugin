@@ -43,7 +43,7 @@ sub initPlugin {
 
     Foswiki::Func::registerRESTHandler(
         'tick', \&_tick,
-        http_allow => 'POST' );
+        http_allow => 'POST', validate => 0, authenticate => 1 );
 
     Foswiki::Func::registerTagHandler(
         'TICK', \&_TICK );
@@ -271,7 +271,12 @@ sub _getUrlParams {
         } elsif($param =~ m#^(SetForm|RemoveField|RemovePref|Append)$#) {
             $urlparams->{$basesuffix}->{$1} = $query->param($param);
         } elsif($param =~ m#^([A-Za-z]*)_(.*?)_(.*)$#) {
-            $urlparams->{$2}->{$1}->{$3} = $query->param($param);
+            my $action = $1;
+            my $topics = $2;
+            my $field = $2;
+            foreach my $topic (split(':', $topics)) {
+                $urlparams->{$topic}->{$action}->{$field} = $query->param($param);
+            }
         } elsif($param =~ m#^([A-Za-z]*)_(.*?)$#) {
             $urlparams->{$basesuffix}->{$1}->{$2} = $query->param($param);
         } else {
@@ -325,6 +330,14 @@ sub _updateBase {
     return undef;
 }
 
+#    * $session: Foswiki session
+#    * $scrWeb: Source web
+#    * $srcTopic: Source topic
+#    * $targetWeb: Target web
+#    * $targetTopic: Target topic
+#    * $parentWeb: Web of the topicparent (optional)
+#    * $parentTopic: Topicparent will be set to this (optional)
+#    * $params: Hash to actions
 sub _copyTopic {
     my ( $session, $srcWeb, $srcTopic, $targetWeb, $targetTopic, $parentWeb, $parentTopic, $params ) = @_;
 
@@ -473,8 +486,9 @@ sub _tick {
     $meta->saveAs($web, $topic, { minor => 1, dontlog => 1, forcenewrevision => 1 });
     # Then this can change to Foswiki::Func::saveTopic($web, $topic, $meta, $text, { minor => 1, dontlog => 1, forcenewrevision => 1 });
 
+    my $scrollTop = $query->param('scrollTop') || 0;
     my $url = Foswiki::Func::getScriptUrl(
-        $web, $topic, 'view',
+        $web, $topic, 'view', scrollTop => $scrollTop
     );
     Foswiki::Func::redirectCgiQuery( undef, $url );
     return
@@ -501,6 +515,10 @@ sub substTick {
 sub _TICK {
     my ( $session, $attributes, $topic, $web ) = @_;
 
+    Foswiki::Func::addToZone('script', 'TICKSCRIPTS', <<SCRIPT, 'JQUERYPLUGIN::FOSWIKI');
+<script type="text/javascript" src="%PUBURLPATH%/%SYSTEMWEB%/ThreeStageProjectsPlugin/tick.js"></script>
+SCRIPT
+
     my $n = $count;
     $count++;
 
@@ -516,12 +534,12 @@ sub _TICK {
 
     my ($date, $author, $rev) = $metacache->getRevisionInfo();
 
-    $attribs .= (($allowTick) ? 'onchange="$(this).closest(\'form\').submit()"' : 'disabled="disabled"');
+    $attribs .= (($allowTick) ? '' : 'disabled="disabled"');
     my $tick = <<TICK;
 <input name="tick" value="on" type="checkbox" $attribs />
 TICK
     $tick = <<FORM if $allowTick;
-<form method='post' action='%SCRIPTURL{rest}%/ThreeStageProjectsPlugin/tick' onsubmit='\$.blockUI && \$.blockUI(); 1'>
+<form method='post' action='%SCRIPTURL{rest}%/ThreeStageProjectsPlugin/tick' class='TSTickForm'>
   $tick
   <input type='hidden' name='count' value='$n' />
   <input type='hidden' name='date' value='$date' />

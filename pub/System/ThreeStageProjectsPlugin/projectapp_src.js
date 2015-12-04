@@ -16,4 +16,25 @@ jQuery(function($) {
 
     // Disable calendar input field
   $('.caldisable .foswikiEditFormDateField').livequery(function() {$(this).attr('readonly', 'readonly');});
+
+    // handle mandatory fields on portal:
+    $('form[name="ThreeStageProjects"]').submit(function() {
+        var hasMandatory = '';
+        $(this).find('input.foswikiMandatory').each(function() {
+            var $this = $(this);
+            var val = $this.val();
+            if(typeof(val) === 'undefined' || val === '') {
+                var name = $this.closest('tr').attr('fieldTitle');
+                if(!name || name.length) {
+                    name = $this.closest('tr').find('td:first').text().replace(/:$/, '');
+                }
+                if(!name.length) name = $this.attr('name');
+                hasMandatory += '\n' + name;
+            }
+        });
+        if(hasMandatory.length) {
+            alert(jsi18n.get('ProjectsApp', 'Some mandatory fields are not filled out: [_1]', hasMandatory));
+            return false;
+        }
+    });
 });

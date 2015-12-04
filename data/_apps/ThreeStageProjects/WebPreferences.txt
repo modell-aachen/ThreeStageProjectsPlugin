@@ -1,4 +1,3 @@
-%META:TOPICINFO{author="BaseUserMapping_333" date="1432648604" format="1.1" version="14"}%
 ---+!! <nop>%WEB% Web Preferences
 
 %TOC%
@@ -12,10 +11,10 @@
 ---++ Modell Aachen Settings
 
    * Set CONTENTTEMPLATEWEB = Processes
-   
+
    * Set WORKFLOW = 
-   
-   
+
+
 
 ---++ Appearance
 
@@ -107,9 +106,18 @@ Users or groups allowed to change or rename this <nop>%TOPIC% topic: (e.g., [[%U
    * Set ALLOWTOPICCHANGE = %USERSWEB%.AdminUser
    * Set ALLOWTOPICRENAME = %USERSWEB%.AdminUser
 
+---++ ActionTracker settings
+   * Set NOACTION =
+   * Set ACTIONTRACKERPLUGIN_EXTRAS = |createdate,date|task,text,50| milestone,select,%FORMATLIST{"%ProjectMSs{default=""}%" format="\"$1\""}% | state,select+values, "%MAKETEXT{"open"}%=open","%MAKETEXT{"closed"}%=closed","%MAKETEXT{"discarded"}%=discarded"|
+   * Set ACTIONTRACKERPLUGIN_TABLEHEADER = | %MAKETEXT{"Milestone"}% |  %MAKETEXT{"Date"}% | %MAKETEXT{"Creator"}% | %MAKETEXT{"Task to"}% | %MAKETEXT{"Task"}% | %MAKETEXT{"Task contents"}% | %MAKETEXT{"Due date"}% | %MAKETEXT{"Closed on"}% | <div style="display: none">Status</div> | %MAKETEXT{"Signal"}% ||
+   * Set ACTIONTRACKERPLUGIN_TABLEFORMAT = | $percnt$milestone$percntNOACTION$percntLabel$percnt | $createdate | $creator | $percntSUBST{text="$who" pattern="^Main\." format=""}$percnt | $task | $text | $due<div style="display: none">($closed)</div> | $closed |  <div style="display: none">$state</div> ||$edit |
+   * Set ACTIONTRACKERPLUGIN_EDITHEADER = | %MAKETEXT{"Milestone"}% | %MAKETEXT{"Task to"}% | %MAKETEXT{"Due date"}% | Status | %MAKETEXT{"Task"}% | QG | %MAKETEXT{"Task contents"}% |
+   * Set ACTIONTRACKERPLUGIN_EDITFORMAT = | $milestone | $who | $due | $state | $task | $qg |
+   * Set ACTIONTRACKERPLUGIN_USERS_AUTOCOMPLETE = %USERAUTOCOMPLETE%
+   * Set ACTIONTRACKERPLUGIN_ENABLESTATESHORTCUT = 0
+   * Set ACTIONTRACKERPLUGIN_VIEWWITHDROPDOWN = 0
+
 ---
 %INCLUDE{"%SYSTEMWEB%.WebPreferencesHelp"}%
 
-
-%META:FILEATTACHMENT{name="logo.png" attachment="logo.png" attr="" comment="" date="1432283313" path="C:\Users\cgrams\Pictures\logo.png" size="6362" user="BaseUserMapping_333" version="1"}%
 %META:PREFERENCE{name="NOWYSIWYG" title="NOWYSIWYG" type="Local" value="1"}%

@@ -1,4 +1,3 @@
-%META:TOPICINFO{author="cgrams" date="1432306551" format="1.1" version="16"}%
 %TMPL:INCLUDE{"SystemView"}%
 
 %{ <verbatim class="tml"> }%
@@ -6,7 +5,7 @@
 %{ </verbatim> }%
 
 %{ <verbatim class="tml"> }%
-%TMPL:DEF{"script"}%%JQREQUIRE{"ui::dialog, ui::button, textboxlist, blockui"}%%ADDTOZONE{"script" id="tableScript" text="<script type='text/javascript' src='%PUBURLPATH%/%SYSTEMWEB%/ProjectsAppContrib/projectapp.js'></script>" requires="JQUERYPLUGIN::FOSWIKI::PREFERENCES"}%%TMPL:END%
+%TMPL:DEF{"script"}%%JQREQUIRE{"ui::dialog, ui::button, textboxlist, blockui"}%%ADDTOZONE{"script" id="tableScript" text="<script type='text/javascript' src='%PUBURLPATH%/%SYSTEMWEB%/ThreeStageProjectsPlugin/projectapp.js'></script>" requires="JQUERYPLUGIN::FOSWIKI::PREFERENCES"}%%IF{"$LANGUAGE='de'" then="$percentADDTOZONE{\"script\" id=\"tableScript:jsi18n\" text=\"<script type='text/javascript' src='%PUBURLPATH%/%SYSTEMWEB%/ThreeStageProjectsPlugin/jsi18n.de.js'></script>\" requires=\"$percentJSI18NID$percent\"}$percent"}%%TMPL:END%
 %{ </verbatim> }%
 
 %{ <verbatim class="tml"> }%

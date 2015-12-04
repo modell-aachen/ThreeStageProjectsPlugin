@@ -1,16 +1,15 @@
-%META:TOPICINFO{author="cgrams" date="1433231914" format="1.1" version="8"}%
 %{ <verbatim class="tml"> }%
 %TMPL:DEF{"modacButtonsLEFT"}%<li><div class='modacActionButtonACTIVE'><a href="%SCRIPTURL{view}%/%WEB%/%TOPIC%">%MAKETEXT{"Projects web"}%</a></div></li>%TMPL:END%
 %{ </verbatim> }%
 
 %{ <verbatim class="tml"> }%
-%TMPL:DEF{"script"}%%JQREQUIRE{"ui::dialog, ui::button, textboxlist, blockui"}%%ADDTOZONE{"script" id="tableScript" text="<script type='text/javascript' src='%PUBURLPATH%/%SYSTEMWEB%/ThreeStageProjectsPlugin/projectapp.js'></script>" requires="JQUERYPLUGIN::FOSWIKI::PREFERENCES"}%%ADDTOZONE{"head" id="tableStyle" text="<style type='text/css'>@import url('%PUBURLPATH%/%SYSTEMWEB%/ThreeStageProjectsPlugin/projectapp.css');</style>"}%%TMPL:PREV%%TMPL:END%
+%TMPL:DEF{"script"}%%JQREQUIRE{"ui::dialog, ui::button, textboxlist, blockui"}%%ADDTOZONE{"script" id="tableScript" text="<script type='text/javascript' src='%PUBURLPATH%/%SYSTEMWEB%/ThreeStageProjectsPlugin/projectapp.js'></script>" requires="JQUERYPLUGIN::FOSWIKI::PREFERENCES"}%%ADDTOZONE{"head" id="tableStyle" text="<style type='text/css'>@import url('%PUBURLPATH%/%SYSTEMWEB%/ThreeStageProjectsPlugin/projectapp.css');</style>"}%%IF{"$LANGUAGE='de'" then="$percentADDTOZONE{\"script\" id=\"tableScript:jsi18n\" text=\"<script type='text/javascript' src='%PUBURLPATH%/%SYSTEMWEB%/ThreeStageProjectsPlugin/jsi18n.de.js'></script>\" requires=\"$percentJSI18NID$percent\"}$percent"}%%TMPL:PREV%%TMPL:END%
 %{ </verbatim> }%
 
 %{ <verbatim class="tml"> }%
 %TMPL:DEF{"ProjectOutlineData"}%<div class="widgetBlockTitle">%MAKETEXT{"Project outline data"}%</div>
-<div class="atpSearch widgetBlockContent">
-<table class="metaDataHead">
+<div class="widgetBlockContent">
+<table class="atpSearch">
 <tr>
   <td>%MAKETEXT{"Order number"}%:</td><td width="300px">%RENDERFORDISPLAY{topic="%TMPL:P{"projecttopic"}%" field="OrderNumber" format="$value"}%</td>
   <td>%MAKETEXT{"Customer"}%:</td><td>%RENDERFORDISPLAY{topic="%TMPL:P{"projecttopic"}%" field="Customer" format="$value"}%</td>

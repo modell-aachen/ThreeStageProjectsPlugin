@@ -4,4 +4,3 @@
 | Responsible | textboxlist | 50 mustMatch limit="1" | %USERAUTOCOMPLETE% | Seitenverantwortlicher | |
 | Due | date | 1 | | Due date | |
 
-%WORKFLOWMETA%
