@@ -273,7 +273,7 @@ sub _getUrlParams {
         } elsif($param =~ m#^([A-Za-z]*)_(.*?)_(.*)$#) {
             my $action = $1;
             my $topics = $2;
-            my $field = $2;
+            my $field = $3;
             foreach my $topic (split(':', $topics)) {
                 $urlparams->{$topic}->{$action}->{$field} = $query->param($param);
             }
