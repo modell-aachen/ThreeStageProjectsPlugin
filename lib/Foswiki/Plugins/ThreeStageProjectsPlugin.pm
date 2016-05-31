@@ -31,15 +31,15 @@ sub initPlugin {
 
     Foswiki::Func::registerRESTHandler(
         'copyautoinc', \&_copyautoinc,
-        http_allow => 'POST' );
+        http_allow => 'POST', validate => 0, authenticate => 1 );
 
     Foswiki::Func::registerRESTHandler(
         'autoinc', \&_autoinc,
-        http_allow => 'POST' );
+        http_allow => 'POST', validate => 0, authenticate => 1 );
 
     Foswiki::Func::registerRESTHandler(
         'updateBase', \&_updateBase,
-        http_allow => 'POST' );
+        http_allow => 'POST', validate => 0, authenticate => 1 );
 
     Foswiki::Func::registerRESTHandler(
         'tick', \&_tick,
@@ -354,9 +354,9 @@ sub _copyTopic {
     my $append = $newMeta->get('PREFERENCE', 'Append');
 
     if($setPref) {
-        $setPref = Foswiki::Func::expandCommonVariables($setPref, $meta);
+        $setPref = Foswiki::Func::expandCommonVariables($setPref->{value}, $meta);
         $newMeta->remove('PREFERENCE', 'SetPref');
-        while($setPref->{value} =~ m#"([^" ]+?)\s*=\s*((?:[^"]|\\")*?)"#g) {
+        while($setPref =~ m#"([^" ]+?)\s*=\s*((?:[^"]|\\")*?)"#g) {
             my $pref = $1;
             my $val = $2;
             $val =~ s#\\"#"#g;
