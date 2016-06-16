@@ -1,3 +1,4 @@
+%META:TOPICINFO{author="BaseUserMapping_333" comment="" date="1464189337" format="1.1" version="15"}%
 %{ <verbatim class="tml"> }%
 %TMPL:INCLUDE{view}%
 %TMPL:INCLUDE{"TSProjectsBase"}%
@@ -64,33 +65,12 @@ else="$percntTMPL:P{\"modacAjaxTab\" label=\"%label%\" id=\"%id%\" section=\"%se
 
 %{ <verbatim class="tml"> }%
 %TMPL:DEF{"contentTasks"}%
-<div class="widgetBlockTitle">%MAKETEXT{"Tasks"}%</div>
+<div class="widgetBlockTitle">%MAKETEXT{"Tasks by milestone"}%</div>
 <div class="widgetBlockContent">
-<div class="modacPrintHide">
-%BUTTON{"%MAKETEXT{"Add task"}%" href="#actiondialog" class="jqUIDialogLink"}%
-%STARTSECTION{"actiondialog"}%
-<div id="actiondialog" title="%MAKETEXT{"Add task"}%" class="jqUIDialog {draggable:true, resizable: true, height:400, width:600}">
-%COMMENT{type="TStaskMS"  location="This should be unique text AIVOqxWgyT"}%
-<div style="display:none;">This should be unique text AIVOqxWgyT%ACTIONSEARCH{web="%WEB%" topic="DummyTopic"}%</div>
-</div>
-</div>
-%ENDSECTION{"actiondialog"}%
-
-<div class="widgetBlockTitle">%MAKETEXT{"Tasks assigned to their milestones"}%</div>
-<div class="widgetBlockContent">
-%TABPANE{select="%URLPARAM{"tab"}%" class="simple"}%
-%TMPL:P{"modacTab" label="$percentTMPL:P{milestone1_label}$percent" id="tasks_milestone1" section="tasks_milestone1"}%
-%TMPL:P{"modacTab" label="$percentTMPL:P{milestone2_label}$percent" id="tasks_milestone2" section="tasks_milestone2"}%
-%TMPL:P{"modacTab" label="$percentTMPL:P{milestone3_label}$percent" id="tasks_milestone3" section="tasks_milestone3"}%
-%TMPL:P{"modacTab" label="$percentTMPL:P{milestone4_label}$percent" id="tasks_milestone4" section="tasks_milestone4"}%
-%TMPL:P{"modacTab" label="$percentTMPL:P{milestone5_label}$percent" id="tasks_milestone5" section="tasks_milestone5"}%
-%TMPL:P{"modacTab" label="$percentTMPL:P{milestone6_label}$percent" id="tasks_milestone6" section="tasks_milestone6"}%
-%TMPL:P{"modacTab" label="$percentTMPL:P{milestone7_label}$percent" id="tasks_milestone7" section="tasks_milestone7"}%
-%TMPL:P{"modacTab" label="$percentTMPL:P{milestoneall_label}$percent" id="tasks_milestoneall" section="tasks_milestoneall"}%
-%ENDTABPANE%
-</div>
+%TMPL:P{"tasks_milestoneall"}%
 </div>
 %TMPL:END%
+
 
 %TMPL:DEF{"task_filter"}%
 <form name="input" action="%SCRIPTURL{"view"}%/%BASEWEB%/%BASETOPIC%" method="get">
@@ -106,8 +86,39 @@ else="$percntTMPL:P{\"modacAjaxTab\" label=\"%label%\" id=\"%id%\" section=\"%se
 %{ Contents for the 'milestoneall' tab. }%
 %TMPL:DEF{"tasks_milestoneall"}%
 %TMPL:P{"printButton" section="tasks_milestoneall"}%
-%TMPL:P{"task_filter" opentab="all"}%
-<div class="SignalTasks">%TMPL:P{"searchactions" milestone="*" who="*"}%</div>
+%TMPL:P{"project_tasks"}%
+%TMPL:END%
+
+%TMPL:DEF{"project_tasks"}%
+%TABFOREACH{
+  "%RENDERFORDISPLAY{form="%WEB%.CustomerProjectTaskForm" fields="Milestone" format="$origvalues"}%, all"
+  titles="%RENDERFORDISPLAY{form="%WEB%.CustomerProjectTaskForm" fields="Milestone" format="$values"}%, %MAKETEXT{"All milestones"}%"
+  titleformat="$title"
+  select="%IF{"defined tab" then="%URLPARAM{"tab"}%"}%"
+  urlformat="%SCRIPTURL{rest}%/RenderPlugin/template?topic=%WEB%.%TOPIC%;name=TSProjectsProjectView;expand=%22projectgrid%22%20milestone%3D%22$value%22;id=%URLPARAM{"id"}%;tid=%URLPARAM{"tid"}%"
+  pdfformat="$percntTMPL:P{\"projectgrid\" milestone=\"$value\"}$percnt"
+  pdfview="%IF{"defined tab" then="id:%URLPARAM{"tab"}%" else="first"}%"
+}%
+%TASKSGRID{id="_dummy_for_loading_scripts" template="tasksapi::empty"}%
+%ADDTOZONE{
+  "script"
+  text="<script type='text/javascript' src='%PUBURLPATH%/%SYSTEMWEB%/ThreeStageProjectsPlugin/tasksapi.js'></script>"
+  requires="TASKSAPI::SCRIPTS"
+}%
+%TMPL:END%
+
+%TMPL:DEF{"projectgrid"}%
+%XLSXLINK{selector="#tasks-table-%milestone%" columns="0,1,2,3,4,5"}%
+%TASKSGRID{
+  id="%milestone%"
+  form="%WEB%.CustomerProjectTaskForm"
+  title=""
+  query="{\"Milestone\":\"%milestone%\"}"
+  templatefile="%WEB%.CustomerProjectTaskViewTemplate"
+  captiontemplate="customerproject::caption"
+  filtertemplate="customerproject::filter"
+  updateurl="%SCRIPTURL{rest}%/RenderPlugin/template?topic=%WEB%.%TOPIC%;name=TSProjectsProjectView;expand=%22projectgrid%22%20milestone%3D%22%milestone%%22"
+}%
 %TMPL:END%
 
 %{ Contents for the 'milestone1' tab. }%
