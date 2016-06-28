@@ -1,6 +1,6 @@
 %META:TOPICINFO{author="BaseUserMapping_333" date="1432280590" format="1.1" version="1"}%
 | *Name* | *Type* | *Size* | *Values* | *Tooltip message* | *Attributes* |
 | TopicTitle | text | 50 | | Bitte geben Sie einen eindeutigen Artikelnamen an | |
-| Responsible | textboxlist | 50 mustMatch limit="1" | %USERAUTOCOMPLETE% | Seitenverantwortlicher | |
-| Due | date | 1 | | Due date | |
+| Responsible | user | 50 | | Seitenverantwortlicher | |
+| Due | date2 | 20 | | Due date | |
 

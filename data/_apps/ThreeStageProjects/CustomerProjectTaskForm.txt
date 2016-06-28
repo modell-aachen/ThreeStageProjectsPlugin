@@ -15,7 +15,7 @@
 | Informees | user+multi | 50 | | Persons to notify on changes | |
 | Prioritize | select+values | | %MAKETEXT{"no"}%=No,%MAKETEXT{"yes"}%=Yes | High priority | |
 | Type | select+values | | %MAKETEXT{"Task"}%=Task,%MAKETEXT{"Decision"}%=Decision,%MAKETEXT{"Information"}%=Information | Type | |
-| Milestone | select+values | | %MAKETEXT{Milestone 1}%=MS1,%MAKETEXT{Milestone 2}%=MS2,%MAKETEXT{Milestone 3}%=MS3,%MAKETEXT{Milestone 4}%=MS4,%MAKETEXT{Milestone 5}%=MS5,%MAKETEXT{Milestone 6}%=MS6,%MAKETEXT{Milestone 7}%=MS7 | Milestone | |
+| Milestone | select+values | | %FORMATLIST{"%ProjectMSs%" format="$percent$1Label$percent=$1"}% | Milestone | |
 
    * Set ALLOWTOPICCHANGE = AdminUser
    * Set NOWYSIWYG = 1

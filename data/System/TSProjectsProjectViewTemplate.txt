@@ -85,14 +85,13 @@ else="$percntTMPL:P{\"modacAjaxTab\" label=\"%label%\" id=\"%id%\" section=\"%se
 
 %{ Contents for the 'milestoneall' tab. }%
 %TMPL:DEF{"tasks_milestoneall"}%
-%TMPL:P{"printButton" section="tasks_milestoneall"}%
 %TMPL:P{"project_tasks"}%
 %TMPL:END%
 
 %TMPL:DEF{"project_tasks"}%
 %TABFOREACH{
-  "%RENDERFORDISPLAY{form="%WEB%.CustomerProjectTaskForm" fields="Milestone" format="$origvalues"}%, all"
-  titles="%RENDERFORDISPLAY{form="%WEB%.CustomerProjectTaskForm" fields="Milestone" format="$values"}%, %MAKETEXT{"All milestones"}%"
+  "%FORMATLIST{"%FORMATLIST{"%ProjectMSs%" format="$percentIF{\"'%SUBST{text="%TOPIC%" pattern="%ProjectBaseSuffix%" format=""}%$1'/Due\" then=\"$1\"}$percent"}%"}%, all"
+  titles="%FORMATLIST{"%FORMATLIST{"%ProjectMSs%" format="$percentIF{\"'%SUBST{text="%TOPIC%" pattern="%ProjectBaseSuffix%" format=""}%$1'/Due\" then=\"$dollarpercent$1Label$dollarpercent\"}$percent"}%"}%, %MAKETEXT{"All milestones"}%"
   titleformat="$title"
   select="%IF{"defined tab" then="%URLPARAM{"tab"}%"}%"
   urlformat="%SCRIPTURL{rest}%/RenderPlugin/template?topic=%WEB%.%TOPIC%;name=TSProjectsProjectView;expand=%22projectgrid%22%20milestone%3D%22$value%22;id=%URLPARAM{"id"}%;tid=%URLPARAM{"tid"}%"
@@ -111,9 +110,11 @@ else="$percntTMPL:P{\"modacAjaxTab\" label=\"%label%\" id=\"%id%\" section=\"%se
 %XLSXLINK{selector="#tasks-table-%milestone%" columns="0,1,2,3,4,5"}%
 %TASKSGRID{
   id="%milestone%"
+  allowcreate="%IF{"'%milestone%'='all'" then="0"}%"
   form="%WEB%.CustomerProjectTaskForm"
   title=""
-  query="{\"Milestone\":\"%milestone%\"}"
+  context="any"
+  query="{\"Milestone\":\"%milestone%\", \"Context\": {\"type\": \"like\", \"substring\": \"%WEB%.%SUBST{text="%TOPIC%" pattern="%ProjectBaseSuffix%" format=""}%\"}}"
   templatefile="%WEB%.CustomerProjectTaskViewTemplate"
   captiontemplate="customerproject::caption"
   filtertemplate="customerproject::filter"

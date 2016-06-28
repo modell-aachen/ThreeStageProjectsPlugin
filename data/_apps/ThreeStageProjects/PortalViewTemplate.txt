@@ -5,7 +5,14 @@
 %{ </verbatim> }%
 
 %{ <verbatim class="tml"> }%
-%TMPL:DEF{"script"}%%JQREQUIRE{"ui::dialog, ui::button, textboxlist, blockui"}%%ADDTOZONE{"script" id="tableScript" text="<script type='text/javascript' src='%PUBURLPATH%/%SYSTEMWEB%/ThreeStageProjectsPlugin/projectapp.js'></script>" requires="JQUERYPLUGIN::FOSWIKI::PREFERENCES"}%%IF{"$LANGUAGE='de'" then="$percentADDTOZONE{\"script\" id=\"tableScript:jsi18n\" text=\"<script type='text/javascript' src='%PUBURLPATH%/%SYSTEMWEB%/ThreeStageProjectsPlugin/jsi18n.de.js'></script>\" requires=\"$percentJSI18NID$percent\"}$percent"}%%TMPL:END%
+%TMPL:DEF{"script"}%%JQREQUIRE{"ui::dialog, ui::button, textboxlist, blockui"}%
+%ADDTOZONE{"script" id="tableScript" text="<script type='text/javascript' src='%PUBURLPATH%/%SYSTEMWEB%/ThreeStageProjectsPlugin/projectapp.js'></script>" requires="JQUERYPLUGIN::FOSWIKI::PREFERENCES"}%
+%ADDTOZONE{"script" id="PICKADATECONTRIB" text="<script type='text/javascript' src='%PUBURLPATH%/%SYSTEMWEB%/PickADateContrib/js/picker.js'></script>" requires="JQUERYPLUGIN::FOSWIKI::PREFERENCES"}%
+%ADDTOZONE{"script" id="PICKADATECONTRIB:DATE" text="<script type='text/javascript' src='%PUBURLPATH%/%SYSTEMWEB%/PickADateContrib/js/picker.date.js'></script>" requires="PICKADATECONTRIB"}%
+%ADDTOZONE{"script" id="PICKADATECONTRIB:INIT" text="<script type='text/javascript' src='%PUBURLPATH%/%SYSTEMWEB%/PickADateContrib/js/picker.init.js'></script>" requires="PICKADATECONTRIB:DATE"}%
+%ADDTOZONE{ "head" text="<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"%PUBURLPATH%/%SYSTEMWEB%/PickADateContrib/css/classic.css\" />" }%
+%ADDTOZONE{ "head" text="<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"%PUBURLPATH%/%SYSTEMWEB%/PickADateContrib/css/classic.date.css\" />" }%
+%IF{"$LANGUAGE='de'" then="$percentADDTOZONE{\"script\" id=\"tableScript:jsi18n\" text=\"<script type='text/javascript' src='%PUBURLPATH%/%SYSTEMWEB%/ThreeStageProjectsPlugin/jsi18n.de.js'></script>\" requires=\"$percentJSI18NID$percent\"}$percent"}%%TMPL:END%
 %{ </verbatim> }%
 
 %{ <verbatim class="tml"> }%
@@ -63,7 +70,7 @@ format="<tr><td>[[$web.$topic][$title]]</td><td>$process_state_s</td><td>$field_
 
 %{ <verbatim class="tml"> }%
 %TMPL:DEF{"MSBody"}%<!-- MS %name% -->
-<td style='text-align:center;'>$percentQUERY{\"'$percentSUBST{text=\"$web.$topic\" pattern=\"%ProjectBaseSuffix%\" format=\"%name%\"}$percent'/Due\"}$percent<span style='display:none'>$percentSOLRSEARCH{\"web:%WEB% topic:$percentSUBST{text=\"$topic\" pattern=\"%ProjectBaseSuffix%\" format=\"%name%\"}$percent* process_state_s:INPROGRESS field_Due_dt:[1990-01-01T23:59:59.999Z TO NOW/DAY+%SIGNAL_PREWARNTIME{default="7"}%DAYS]\" format=\"<nop>\" footer=\"AMBER \"}$percent$percentSOLRSEARCH{\"web:%WEB% process_state_s:INPROGRESS topic:$percentSUBST{text=\"$topic\" pattern=\"%ProjectBaseSuffix%\" format=\"%name%\"}$percent* field_Due_dt:[1990-01-01T23:59:59.999Z TO NOW/DAY]\" format=\"<nop>\" footer=\"RED \"}$percent$percentWORKFLOWMETA{topic=\"$percentSUBST{text=\"$web.$topic\" pattern=\"%ProjectBaseSuffix%\" format=\"%name%\"}$percent\" web=\"$web\"}$percent</span></td>
+<td style='text-align:center;'>$percentRENDERFORDISPLAY{topic=\"$percentSUBST{text=\"$web.$topic\" pattern=\"%ProjectBaseSuffix%\" format=\"%name%\"}$percent\" fields=\"Due\" format=\"$value\"}$percent<span style='display:none'>$percentSOLRSEARCH{\"web:%WEB% topic:$percentSUBST{text=\"$topic\" pattern=\"%ProjectBaseSuffix%\" format=\"%name%\"}$percent* process_state_s:INPROGRESS field_Due_dt:[1990-01-01T23:59:59.999Z TO NOW/DAY+%SIGNAL_PREWARNTIME{default="7"}%DAYS]\" format=\"<nop>\" footer=\"AMBER \"}$percent$percentSOLRSEARCH{\"web:%WEB% process_state_s:INPROGRESS topic:$percentSUBST{text=\"$topic\" pattern=\"%ProjectBaseSuffix%\" format=\"%name%\"}$percent* field_Due_dt:[1990-01-01T23:59:59.999Z TO NOW/DAY]\" format=\"<nop>\" footer=\"RED \"}$percent$percentWORKFLOWMETA{topic=\"$percentSUBST{text=\"$web.$topic\" pattern=\"%ProjectBaseSuffix%\" format=\"%name%\"}$percent\" web=\"$web\"}$percent</span></td>
 <!-- /MS %name% -->%TMPL:END%
 %{ </verbatim> }%
 
@@ -72,7 +79,7 @@ format="<tr><td>[[$web.$topic][$title]]</td><td>$process_state_s</td><td>$field_
 %{ </verbatim> }%
 
 %{ <verbatim class="tml"> }%
-%TMPL:DEF{"ListFields"}%web, topic, webtopic, title, field_Responsible_lst, field_Due_dt%TMPL:END%
+%TMPL:DEF{"ListFields"}%web, topic, webtopic, title, field_Responsible_s, field_Due_dt%TMPL:END%
 %{ </verbatim> }%
 
 %{ <verbatim class="tml"> }%
@@ -169,11 +176,11 @@ format="<tr><td>[[$web.$topic][$title]]</td><td>$process_state_s</td><td>$field_
      %%name%Label%
   </td>
   <td>
+    %RENDERFOREDIT{form="TSProjectsMilestoneForm" fields="Responsible" Responsible_name="Update_%name%_Responsible" format="$edit"}%
     <input type="hidden" name="%name%Template" value="%%name%Template%" />
-    <input type="text" name="Update_%name%_Responsible" autocomplete="%USERAUTOCOMPLETE%">
   </td>
   <td>
-    <input type="text" class="foswikiInputField" id="%name%Due" name="Update_%name%_Due" /><img src="%PUBURLPATH%/%SYSTEMWEB%/JSCalendarContrib/img.gif" class="foswikiButton foswikiEditFormCalendarButton" onclick="return showCalendar('%name%Due', ' %e %b %Y ')" /><img style="cursor: pointer; padding-left: 3px;" src="/pub/System/DocumentGraphics/trash-small.png" alt="" onclick="$(this).closest('td').find('.foswikiEditFormDateField,.foswikiInputField').val('')">
+    <input type="text" class="foswikiInputField foswikiPickADate" id="%name%Due" name="Update_%name%_Due" />
   </td>
 </tr>
 <!-- /MS %name% -->%TMPL:END%

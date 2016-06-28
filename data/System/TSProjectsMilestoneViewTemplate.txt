@@ -67,45 +67,35 @@ else="$percntTMPL:P{\"modacAjaxTab\" label=\"%label%\" id=\"%id%\" section=\"%se
 %TMPL:DEF{"contentTasks"}%
 <div class="widgetBlockTitle">%MAKETEXT{"Tasks"}%</div>
 <div class="widgetBlockContent">
-<div class="modacPrintHide">
-%BUTTON{"%MAKETEXT{"Add task"}%" href="#actiondialog" class="jqUIDialogLink"}%
-%STARTSECTION{"actiondialog"}%
-<div id="actiondialog" title="%MAKETEXT{"Add task"}%" class="jqUIDialog {draggable:true, resizable: true, height:400, width:600}">
-%COMMENT{type="TStaskMS"  location="This should be unique text AIVOqxWgyT"}%
-<div style="display:none;">This should be unique text AIVOqxWgyT%ACTIONSEARCH{web="%WEB%" topic="DummyTopic"}%</div>
-</div>
-</div>%AMPEL{QUERY=".SignalTasks" DATE="%MAKETEXT{"Due date"}%" DST="%MAKETEXT{"Signal"}%" DONE="%MAKETEXT{"Signal"}%" COND="FINISHED" WARN="%SIGNAL_PREWARNTIME{default="7"}%"}%
-%ENDSECTION{"actiondialog"}%
+%TABFOREACH{
+  "%RENDERFORDISPLAY{form="%WEB%.CustomerProjectTaskForm" fields="Status" format="$origvalues"}%, all"
+  titles="%RENDERFORDISPLAY{form="%WEB%.CustomerProjectTaskForm" fields="Status" format="$values"}%, %MAKETEXT{"All items"}%"
+  titleformat="$title"
+  select="%IF{"defined tab" then="%URLPARAM{"tab"}%"}%"
+  urlformat="%SCRIPTURL{rest}%/RenderPlugin/template?topic=%WEB%.%TOPIC%;name=TSProjectsMilestoneView;expand=%22milestone_tasks%22%20state%3D%22$value%22;id=%URLPARAM{"id"}%;tid=%URLPARAM{"tid"}%"
+  pdfformat="$percntTMPL:P{\"milestone_tasks\"}$percnt"
+  pdfview="%IF{"defined tab" then="id:%URLPARAM{"tab"}%" else="first"}%"
+}%
+%TASKSGRID{id="_dummy_for_loading_scripts" template="tasksapi::empty"}%
+%ADDTOZONE{
+  "script"
+  text="<script type='text/javascript' src='%PUBURLPATH%/%SYSTEMWEB%/ThreeStageProjectsPlugin/tasksapi.js'></script>"
+  requires="TASKSAPI::SCRIPTS"
+}%
+</div>%TMPL:END%
 
-<div class="widgetBlockTitle">%MAKETEXT{"Tasks assigned to their milestones"}%</div>
-<div class="widgetBlockContent">
-%TMPL:P{"tasks_milestoneall"}%
-</div>
-</div>
-%TMPL:END%
-
-%TMPL:DEF{"task_filter"}%
-<form name="input" action="%SCRIPTURL{"view"}%/%BASEWEB%/%BASETOPIC%" method="get">
-<input type="hidden" name="tab" value="%opentab%">
-<select name="state" onChange="this.form.submit()"><option value="open" %IF{"'%URLPARAM{"state"}%'='open'" then="selected"}%>%MAKETEXT{"Open tasks"}%</option><option value="closed" %IF{"'%URLPARAM{"state"}%'='closed'" then="selected"}%>%MAKETEXT{"Closed tasks"}%</option><option value="discarded" %IF{"'%URLPARAM{"state"}%'='discarded'" then="selected"}%>%MAKETEXT{"Discarded tasks"}%</option><option value="open|closed|discarded" %IF{"'%URLPARAM{"state"}%'='open|closed|discarded'" then="selected"}%>%MAKETEXT{"All tasks"}%</option></select>
-</form>
-%TMPL:END%
-
-%TMPL:DEF{"searchactions"}%
-%ACTIONSEARCH{milestone="%TMPL:P{"basetopicsuffix"}%" who="%who%" web="%WEB%" topic="%TMPL:P{"projecttopic"}%" state="%URLPARAM{"state" default="open"}%" sort="$createdate,$who,$due" jqsortable="1" jqsortopts="widgets: ['zebra'], sortList: [[0,1],[0,1]], headers: { 1: { sorter: 'qwikiDate' }, 6: { sorter: 'qwikiDate' }, 10: { sorter: false } }"}%
-%TMPL:END%
-
-%{ Contents for the 'milestoneall' tab. }%
-%TMPL:DEF{"tasks_milestoneall"}%
-%TMPL:P{"printButton" section="tasks_milestoneall"}%
-%TMPL:P{"task_filter" opentab="all"}%
-<div class="SignalTasks">%TMPL:P{"searchactions" milestone="*" who="*"}%</div>
-%TMPL:END%
-
-%TMPL:DEF{"printButton"}%%IF{"context MAPrinceModPluginEnabled"
-then="<div class='atpExportFrame'><a href=\"%SCRIPTURL{"view"}%/%SYSTEMWEB%/MAPrinceModPrintDialog?skin=text&section=dialog&pweb=%ENCODE{"%INCLUDINGWEB%" type="url"}%&ptopic=%ENCODE{"%INCLUDINGTOPIC%" type="url"}%&landscape=%LANDSCAPE{default="0"}%&printParams=printTab,DaysClosed&printTab=%section%&DaysClosed=%URLPARAM{"DaysClosed"}%\" class=\"jqUIDialogLink {cache:false} modacPrintHide atpExportButton\" title='%MAKETEXT{"Export these tasks to PDF"}%'>$percentICON{pdf}$percent</a></div>" else="<!-- no print -->"}%%TMPL:END%
-+
-
+%TMPL:DEF{"milestone_tasks"}%
+%XLSXLINK{selector="#tasks-table-%state%" columns="0,1,2,3,4,5"}%
+%TASKSGRID{
+  id="%state%"
+  form="%WEB%.CustomerProjectTaskForm"
+  title=""
+  query="{\"Milestone\":\"%SUBST{text="%TOPIC%" pattern="(%ProjectBasePrefix%\d+)" format=""}%\", \"Status\":\"%state%\"}"
+  templatefile="%WEB%.CustomerProjectTaskViewTemplate"
+  captiontemplate="customerproject::caption"
+  filtertemplate="customerproject::filter"
+  updateurl="%SCRIPTURL{rest}%/RenderPlugin/template?topic=%WEB%.%TOPIC%;name=TSProjectsMilestoneView;expand=%22milestone_tasks%22%20state%3D%22$value%22;"
+}%%TMPL:END%
 
 
 %{<verbatim class="tml">}%
