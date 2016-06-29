@@ -88,6 +88,7 @@ else="$percntTMPL:P{\"modacAjaxTab\" label=\"%label%\" id=\"%id%\" section=\"%se
 %XLSXLINK{selector="#tasks-table-%state%" columns="0,1,2,3,4,5"}%
 %TASKSGRID{
   id="%state%"
+  allowcreate="%IF{"'%state%'='all'" then="0" else="1"}%"
   form="%WEB%.CustomerProjectTaskForm"
   title=""
   query="{\"Milestone\":\"%SUBST{text="%TOPIC%" pattern="(%ProjectBasePrefix%\d+)" format=""}%\", \"Status\":\"%state%\"}"

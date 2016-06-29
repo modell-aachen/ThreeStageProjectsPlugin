@@ -8,8 +8,9 @@
 %TMPL:DEF{"script"}%%JQREQUIRE{"ui::dialog, ui::button, textboxlist, blockui"}%
 %ADDTOZONE{"script" id="tableScript" text="<script type='text/javascript' src='%PUBURLPATH%/%SYSTEMWEB%/ThreeStageProjectsPlugin/projectapp.js'></script>" requires="JQUERYPLUGIN::FOSWIKI::PREFERENCES"}%
 %ADDTOZONE{"script" id="PICKADATECONTRIB" text="<script type='text/javascript' src='%PUBURLPATH%/%SYSTEMWEB%/PickADateContrib/js/picker.js'></script>" requires="JQUERYPLUGIN::FOSWIKI::PREFERENCES"}%
+%IF{"$LANGUAGE='de' OR $LANGUAGE='fr'" then="$percntADDTOZONE{\"script\" id=\"PICKADATECONTRIB:LANG\" text=\"<script type='text/javascript' src='%PUBURLPATH%/%SYSTEMWEB%/PickADateContrib/js/i18n/%LANGUAGE%.js'></script>\" requires=\"PICKADATECONTRIB\"}$percnt"}%
 %ADDTOZONE{"script" id="PICKADATECONTRIB:DATE" text="<script type='text/javascript' src='%PUBURLPATH%/%SYSTEMWEB%/PickADateContrib/js/picker.date.js'></script>" requires="PICKADATECONTRIB"}%
-%ADDTOZONE{"script" id="PICKADATECONTRIB:INIT" text="<script type='text/javascript' src='%PUBURLPATH%/%SYSTEMWEB%/PickADateContrib/js/picker.init.js'></script>" requires="PICKADATECONTRIB:DATE"}%
+%ADDTOZONE{"script" id="PICKADATECONTRIB:INIT" text="<script type='text/javascript' src='%PUBURLPATH%/%SYSTEMWEB%/PickADateContrib/js/picker.init.js'></script>" requires="PICKADATECONTRIB:DATE%IF{"$LANGUAGE='de' OR $LANGUAGE='fr'" then=",PICKADATECONTRIB:LANG"}%"}%
 %ADDTOZONE{ "head" text="<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"%PUBURLPATH%/%SYSTEMWEB%/PickADateContrib/css/classic.css\" />" }%
 %ADDTOZONE{ "head" text="<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"%PUBURLPATH%/%SYSTEMWEB%/PickADateContrib/css/classic.date.css\" />" }%
 %IF{"$LANGUAGE='de'" then="$percentADDTOZONE{\"script\" id=\"tableScript:jsi18n\" text=\"<script type='text/javascript' src='%PUBURLPATH%/%SYSTEMWEB%/ThreeStageProjectsPlugin/jsi18n.de.js'></script>\" requires=\"$percentJSI18NID$percent\"}$percent"}%%TMPL:END%
