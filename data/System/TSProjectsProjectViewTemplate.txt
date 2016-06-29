@@ -101,6 +101,7 @@ else="$percntTMPL:P{\"modacAjaxTab\" label=\"%label%\" id=\"%id%\" section=\"%se
 %TASKSGRID{id="_dummy_for_loading_scripts" template="tasksapi::empty"}%
 %ADDTOZONE{
   "script"
+  id="THREESTAGES::TASKSAPI"
   text="<script type='text/javascript' src='%PUBURLPATH%/%SYSTEMWEB%/ThreeStageProjectsPlugin/tasksapi.js'></script>"
   requires="TASKSAPI::SCRIPTS"
 }%
