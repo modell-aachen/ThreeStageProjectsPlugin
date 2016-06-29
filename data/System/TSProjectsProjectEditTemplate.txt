@@ -8,6 +8,8 @@
 <form name="main" action="%SCRIPTURLPATH{"rest"}%/ThreeStageProjectsPlugin/updateBase" method="post">%TMPL:END%
 %{ </verbatim> }%
 
+%TMPL:DEF{"formparameters:edit"}%%TMPL:END%
+
 %{ <verbatim class="tml"> }%
 %TMPL:DEF{"content"}%%TMPL:P{"simpleheader"}%
 %TMPL:P{"formstart"}%%TMPL:P{"formtop"}%
@@ -53,7 +55,7 @@
 %{</verbatim>}%
 
 %{ <verbatim class="tml"> }%
-%TMPL:DEF{"qgateRow"}%<tr><td>%gate%: %%gate%Label%</td><td>%RENDERFOREDIT{field="Due" prefix="Update_%gate%_" format="$edit" topic="%TMPL:P{basetopic}%%gate%"}%<img style="cursor: pointer; padding-left: 3px;" src="/pub/System/DocumentGraphics/trash-small.png" alt="" onclick="$(this).closest('td').find('.foswikiEditFormDateField').val('')"></td><td>%RENDERFOREDIT{field="Responsible" prefix="Update_%gate%_" format="$edit" topic="%TMPL:P{basetopic}%%gate%"}%</td></tr>%TMPL:END%
+%TMPL:DEF{"qgateRow"}%<tr><td>%gate%: %%gate%Label%</td><td>%RENDERFOREDIT{field="Due" prefix="Update_%gate%_" format="$edit" topic="%TMPL:P{basetopic}%%gate%"}%</td><td>%RENDERFOREDIT{field="Responsible" prefix="Update_%gate%_" format="$edit" topic="%TMPL:P{basetopic}%%gate%"}%</td></tr>%TMPL:END%
 %{ </verbatim> }%
 
 %{ <verbatim class="tml"> }%

@@ -1,16 +1,18 @@
 %META:TOPICINFO{author="BaseUserMapping_333" comment="reprev" date="1407162370" format="1.1" reprev="2" version="2"}%
 %META:TOPICPARENT{name="WebTopicList"}%
 | *Name* | *Type* | *Size* | *Values* | *Tooltip message* | *Attributes* |
-| DocumentType | select+values | 1 | %MAKETEXT{"Info page"}%=Info page,%MAKETEXT{"Process description"}%=Process description,%MAKETEXT{"Work instruction"}%=Work instruction,%MAKETEXT{"Checklist"}%=Checklist | %MAKETEXT{"Please choose a document type"}% | |
-| TopicTitle | text | 50 | | %MAKETEXT{"Please specify a distinct topic title"}% | |
-| Responsible | textboxlist | 50 mustMatch limit="1" | %USERAUTOCOMPLETE% | %MAKETEXT{"Responsible"}% | M |
-| AreaOfApplication | select+values | 1 | %MAKETEXT{"corporation-wide"}%=corporation-wide | %MAKETEXT{"Area of application"}% | |
-| ISO9001 | textboxlist | | | %MAKETEXT{"Norm classification"}% | |
-| ISO14001 | textboxlist | | | %MAKETEXT{"Norm classification"}% | |
-| ISOTS16949 | textboxlist | | | %MAKETEXT{"Norm classification"}% | |
-| OHSAS18001 | textboxlist | | | %MAKETEXT{"Norm classification"}% | |
-| ISO50001 | textboxlist | | | %MAKETEXT{"Norm classification"}% | |
-| Due | date | | | %MAKETEXT{"Due date"}% | |
+| DocumentType | select+values | 1 | %MAKETEXT{"Info page"}%=Info page,%MAKETEXT{"Process description"}%=Process description,%MAKETEXT{"Work instruction"}%=Work instruction,%MAKETEXT{"Checklist"}%=Checklist | Please choose a document type | |
+| TopicTitle | text | 50 | | Please specify a distinct topic title | |
+| Responsible | user | 50 | | Responsible | M |
+| AreaOfApplication | select+values | 1 | %MAKETEXT{"corporation-wide"}%=corporation-wide | Area of application | |
+| ISO9001 | select2+multi | 50 | %SCRIPTURL{view}%/%STANDARDSWEB%/StandardAjaxHelper?contenttype=text/plain;skin=text;section=norm;norm=ISO9001 | %MAKETEXT{"Norm classification"}% | displayTopic="%STANDARDSWEB%.StandardAjaxHelper" displaySection="norm_display" displayParams="norm=ISO9001" |
+| ISO9001:2015 | select2+multi | 50 | %SCRIPTURL{view}%/%STANDARDSWEB%/StandardAjaxHelper?contenttype=text/plain;skin=text;section=norm;norm=ISO90012015 | %MAKETEXT{"Norm classification"}% | displayTopic="%STANDARDSWEB%.StandardAjaxHelper" displaySection="norm_display" displayParams="norm=ISO90012015" |
+| ISO14001 | select2+multi | 50 | %SCRIPTURL{view}%/%STANDARDSWEB%/StandardAjaxHelper?contenttype=text/plain;skin=text;section=norm;norm=ISO14001 | %MAKETEXT{"Norm classification"}% | displayTopic="%STANDARDSWEB%.StandardAjaxHelper" displaySection="norm_display" displayParams="norm=ISO14001" |
+| ISO14001:2015 | select2+multi | 50 | %SCRIPTURL{view}%/%STANDARDSWEB%/StandardAjaxHelper?contenttype=text/plain;skin=text;section=norm;norm=ISO140012015 | %MAKETEXT{"Norm classification"}% | displayTopic="%STANDARDSWEB%.StandardAjaxHelper" displaySection="norm_display" displayParams="norm=ISO140012015" |
+| ISOTS16949 | select2+multi | 50 | %SCRIPTURL{view}%/%STANDARDSWEB%/StandardAjaxHelper?contenttype=text/plain;skin=text;section=norm;norm=ISOTS16949 | %MAKETEXT{"Norm classification"}% | displayTopic="%STANDARDSWEB%.StandardAjaxHelper" displaySection="norm_display" displayParams="norm=ISOTS16949" |
+| OHSAS18001 | select2+multi | 50 | %SCRIPTURL{view}%/%STANDARDSWEB%/StandardAjaxHelper?contenttype=text/plain;skin=text;section=norm;norm=OHSAS18001 | %MAKETEXT{"Norm classification"}% | displayTopic="%STANDARDSWEB%.StandardAjaxHelper" displaySection="norm_display" displayParams="norm=OHSAS18001" |
+| ISO50001 | select2+multi | 50 | %SCRIPTURL{view}%/%STANDARDSWEB%/StandardAjaxHelper?contenttype=text/plain;skin=text;section=norm;norm=ISO50001 | %MAKETEXT{"Norm classification"}% | displayTopic="%STANDARDSWEB%.StandardAjaxHelper" displaySection="norm_display" displayParams="norm=ISO50001" |
+| Due | date2 | | | Due date | |
 
 %META:PREFERENCE{name="WORKFLOW" title="WORKFLOW" type="Local" value=""}%
 %META:PREFERENCE{name="ALLOWTOPICCHANGE" title="ALLOWTOPICCHANGE" type="Set" value="AdminGroup"}%
