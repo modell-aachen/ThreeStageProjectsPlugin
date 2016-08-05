@@ -1,3 +1,4 @@
+%META:TOPICINFO{author="BaseUserMapping_333" date="1467109570" format="1.1" version="2"}%
 ---+!! <nop>%WEB% Web Preferences
 
 %TOC%
@@ -47,7 +48,7 @@
 ---++ ThreeStageProjcets settings
 
 Set the template for the project's base here:
-   * Set ProjectBaseTemplate = _apps/ThreeStageProjects.ProjectTemplateBase
+   * Set ProjectBaseTemplate = ThreeStageProjects.ProjectTemplateBase
 
 Set the prefix and suffix for each new project here.
 For example =ProjectBasePrefix = Project= and =ProjectSuffix = Base= corresponds to =ProjectAUTOINC000Base=.
@@ -75,17 +76,17 @@ Set the templates for the milestones. Don't forget to add a =Set SetPref="WORKFL
 This is the template used for the first process of MS1
    * Set MS1P1Template = Processes.MS1Process1
 This is the template used for the first process of MS1
-   * Set MS1P2Template = Processes.MS2Process2
+   * Set MS1P2Template = Processes.MS1Process2
 
    * Set MS2Label = %MAKETEXT{"Milestone 2"}%
-   * Set MS2Template = _apps/ThreeStageProjects.MSTemplate
+   * Set MS2Template = ThreeStageProjects.MSTemplate
    * Set MS2P1Template = Processes.MS2Process1
    * Set MS2P2Template = Processes.MS2Process2
    * Set MS2P3Template = Processes.MS2Process3
    * Set MS2Processes = MS2P1, MS2P2, MS2P3
 
    * Set MS3Label = %MAKETEXT{"Milestone 3"}%
-   * Set MS3Template = _apps/ThreeStageProjects.MSTemplate
+   * Set MS3Template = ThreeStageProjects.MSTemplate
    * Set MS3P1Template = Processes.MS3Process1
    * Set MS3Processes = MS3P1
 
