@@ -9,6 +9,8 @@ data/System/TSProjectsProjectViewTemplate.txt 0644
 data/System/ThreeStageProjectsPlugin.txt 0644
 data/_apps/ThreeStageProjects/CustomSkinActionformTemplate.txt 0644
 data/_apps/ThreeStageProjects/CustomSkinCommentPluginTemplate.txt 0644
+data/_apps/ThreeStageProjects/CustomerProjectTaskForm.txt 0644
+data/_apps/ThreeStageProjects/CustomerProjectTaskViewTemplate.txt 0644
 data/_apps/ThreeStageProjects/DocumentForm.txt 0644
 data/_apps/ThreeStageProjects/MSTemplate.txt 0644
 data/_apps/ThreeStageProjects/MilestoneApprovalWorkflow.txt 0644
@@ -39,3 +41,4 @@ pub/System/ThreeStageProjectsPlugin/jsi18n.de.js 0644
 pub/System/ThreeStageProjectsPlugin/projectapp.css 0644
 pub/System/ThreeStageProjectsPlugin/projectapp.js 0644
 pub/System/ThreeStageProjectsPlugin/tick.js 0644
+pub/System/ThreeStageProjectsPlugin/tasksapi.js 0644

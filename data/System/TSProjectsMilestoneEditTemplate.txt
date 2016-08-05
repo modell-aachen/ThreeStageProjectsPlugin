@@ -12,6 +12,8 @@
 <form name="main" action="%SCRIPTURLPATH{"rest"}%/ThreeStageProjectsPlugin/updateBase" method="post">%TMPL:END%
 %{</verbatim>}%
 
+%TMPL:DEF{"formparameters:edit"}%%TMPL:END%
+
 %{ <verbatim class="tml"> }%
 %TMPL:DEF{"content"}%%TMPL:P{"simpleheader"}%
 %TMPL:P{"formstart"}%%TMPL:P{"formtop"}%
@@ -53,7 +55,7 @@
 
 
 %{ <verbatim class="tml"> }%
-%TMPL:DEF{"processRow"}%<tr><td>[[%TMPL:P{basetopic}%%process%]]</td><td width="200px">%RENDERFOREDIT{field="Due" prefix="Update_%process%_" format="$edit" topic="%TMPL:P{basetopic}%%process%"}%<img style="cursor: pointer; padding-left: 3px;" src="/pub/System/DocumentGraphics/trash-small.png" alt="" onclick="$(this).closest('td').find('.foswikiEditFormDateField').val('')"></td><td width="200px">%RENDERFOREDIT{field="Responsible" prefix="Update_%process%_" format="$edit" topic="%TMPL:P{basetopic}%%process%"}%</td></tr>%TMPL:END%
+%TMPL:DEF{"processRow"}%<tr><td>[[%TMPL:P{basetopic}%%process%]]</td><td width="200px">%RENDERFOREDIT{field="Due" prefix="Update_%process%_" format="$edit" topic="%TMPL:P{basetopic}%%process%"}%</td><td width="200px">%RENDERFOREDIT{field="Responsible" prefix="Update_%process%_" format="$edit" topic="%TMPL:P{basetopic}%%process%"}%</td></tr>%TMPL:END%
 %{ </verbatim> }%
 
 %{ <verbatim class="tml"> }%

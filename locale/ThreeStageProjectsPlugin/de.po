@@ -200,3 +200,9 @@ msgstr "Titel"
 
 msgid "Work instruction"
 msgstr "Arbeitsanweisung"
+
+msgid "Tasks by milestone"
+msgstr "Aufgaben nach Meilensteinen"
+
+msgid "All milestones"
+msgstr "Alle Meilensteine"
