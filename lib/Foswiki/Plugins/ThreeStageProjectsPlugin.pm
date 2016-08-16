@@ -479,7 +479,7 @@ sub _tick {
 
 
     my $n;
-    $text =~ s#\%TICK((?:{[^}]*})?)\%#substTick($count, $n++, $1, $tick)#eg;
+    $text =~ s#\%TICK((?:\{[^}]*\})?)\%#substTick($count, $n++, $1, $tick)#eg;
 
     # Until the bypass context in KVPPlugin is released:
     $meta->text($text);
@@ -498,8 +498,8 @@ sub substTick {
     my ( $count, $n, $params, $tick ) = @_;
 
     if($params) {
-        $params =~ s#^{##;
-        $params =~ s#}$##;
+        $params =~ s#^\{##;
+        $params =~ s#\}$##;
         $params .= ' ' if $params;
     } else {
         $params = '';
@@ -561,7 +561,7 @@ sub _HASOPENTICKS {
         ($metacache, $text) = Foswiki::Func::readTopic($web, $topic);
     }
 
-    if($text =~ m#\%TICK\%|\%TICK{[^}]*ticked="[^1]"[^}]*}\%#m) {
+    if($text =~ m#\%TICK\%|\%TICK\{[^}]*ticked="[^1]"[^}]*\}\%#m) {
         return 1;
     }
     return 0;
